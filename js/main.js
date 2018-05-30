@@ -3,12 +3,12 @@
 const RIGHT_ARROW = 39;
 const LEFT_ARROW = 37;
 
-const APP = document.querySelector(`.app`);
-const MAIN = APP.querySelector(`.main`);
-const TEMPLATES = document.querySelector(`#templates`).content.cloneNode(true);
-const SCREENS = TEMPLATES.querySelectorAll(`section.main`);
-const SCREENS_ARR = Array.from(SCREENS);
-const NAVIGATION_BTN = `<div class="arrows__wrap">
+const app = document.querySelector(`.app`);
+const main = app.querySelector(`.main`);
+const templates = document.querySelector(`#templates`).content.cloneNode(true);
+const screens = templates.querySelectorAll(`section.main`);
+const screensArr = Array.from(screens);
+const navigationBtn = `<div class="arrows__wrap">
   <style>
 .arrows__wrap {
   position: absolute;
@@ -25,30 +25,30 @@ const NAVIGATION_BTN = `<div class="arrows__wrap">
 <button class="arrows__btn arrows__btn--prev"><-</button>
   <button class="arrows__btn arrows__btn--next">-></button>
 </div>`;
-let ARROW_PREV;
-let ARROW_NEXT;
+let arrowPrev;
+let arrowNext;
 
 
 const addNavigation = () => {
-  APP.insertAdjacentHTML(`beforeEnd`, NAVIGATION_BTN);
-  ARROW_PREV = APP.querySelector(`.arrows__btn--prev`);
-  ARROW_NEXT = APP.querySelector(`.arrows__btn--next`);
+  app.insertAdjacentHTML(`beforeEnd`, navigationBtn);
+  arrowPrev = app.querySelector(`.arrows__btn--prev`);
+  arrowNext = app.querySelector(`.arrows__btn--next`);
 };
 
 addNavigation();
 
 
 const showScreen = (index) => {
-  MAIN.innerHTML = ``;
-  MAIN.appendChild(index);
+  main.innerHTML = ``;
+  main.appendChild(index);
 };
 
 let currentScreen = 0;
 const switchScreen = (index) => {
-  index = index >= SCREENS_ARR.length ? 0 : index;
-  index = index < 0 ? SCREENS_ARR.length - 1 : index;
+  index = index >= screensArr.length ? 0 : index;
+  index = index < 0 ? screensArr.length - 1 : index;
   currentScreen = index;
-  showScreen(SCREENS_ARR[currentScreen]);
+  showScreen(screensArr[currentScreen]);
 };
 
 switchScreen(currentScreen);
@@ -64,11 +64,11 @@ document.addEventListener(`keydown`, (evt) => {
   }
 });
 
-ARROW_PREV.addEventListener(`click`, () => {
+arrowPrev.addEventListener(`click`, () => {
   switchScreen(currentScreen - 1);
 });
 
-ARROW_NEXT.addEventListener(`click`, () => {
+arrowNext.addEventListener(`click`, () => {
   switchScreen(currentScreen + 1);
 });
 
