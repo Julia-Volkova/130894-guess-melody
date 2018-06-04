@@ -93,7 +93,7 @@ switchScreen(secondGameScreenElement);
 
 const answerBtn = document.querySelector(`.genre-answer-send`);
 answerBtn.setAttribute(`disabled`, `disabled`);
-const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const checkboxes = document.querySelectorAll(`input[type="checkbox"]`);
 const checkboxesArr = Array.from(checkboxes);
 let checkState = [];
 let checkOne;
