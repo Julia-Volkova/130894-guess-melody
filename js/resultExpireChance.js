@@ -1,4 +1,5 @@
-import {render} from "./util";
+import {render, switchScreen} from "./util";
+import {welcomeScreenElement} from "./welcomeScreen";
 
 const resultExpireChance = `<section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
@@ -9,5 +10,11 @@ const resultExpireChance = `<section class="main main--result">
   </section>`;
 
 const resultExpireChanceElement = render(resultExpireChance);
+switchScreen(resultExpireChanceElement);
+
+const replayBtn = document.querySelector(`.main-replay`);
+replayBtn.addEventListener(`click`, () => {
+  switchScreen(welcomeScreenElement);
+});
 
 export {resultExpireChanceElement};

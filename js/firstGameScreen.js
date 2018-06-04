@@ -68,10 +68,10 @@ const firstGameScreen = `<section class="main main--level main--level-artist">
 const firstGameScreenElement = render(firstGameScreen);
 switchScreen(firstGameScreenElement);
 
-const answer = document.querySelectorAll(`.main-answer`);
-const answerArr = Array.from(answer);
+const answers = document.querySelectorAll(`.main-answer`);
+const answersArr = Array.from(answers);
 
-answerArr.forEach((el) => {
+answersArr.forEach((el) => {
   el.addEventListener(`click`, () => {
     switchScreen(secondGameScreenElement);
   });

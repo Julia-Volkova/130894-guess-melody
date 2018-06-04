@@ -1,5 +1,5 @@
 import {render, switchScreen} from "./util";
-import {resultWinElement} from "./resultWin";
+import {resultExpireChanceElement} from "./resultExpireChance";
 import {welcomeScreenElement} from "./welcomeScreen";
 
 const secondGameScreen = ` <section class="main main--level main--level-genre">
@@ -93,23 +93,15 @@ switchScreen(secondGameScreenElement);
 
 const answerBtn = document.querySelector(`.genre-answer-send`);
 answerBtn.setAttribute(`disabled`, `disabled`);
-const check1 = document.querySelector(`#a-1`);
-const check2 = document.querySelector(`#a-2`);
-const check3 = document.querySelector(`#a-3`);
-const check4 = document.querySelector(`#a-4`);
-
-let checkBlock = [];
-checkBlock.push(check1);
-checkBlock.push(check2);
-checkBlock.push(check3);
-checkBlock.push(check4);
+const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+const checkboxesArr = Array.from(checkboxes);
 let checkState = [];
 let checkOne;
 
-checkBlock.forEach((elem) => {
+checkboxesArr.forEach((elem) => {
   elem.addEventListener(`click`, () => {
     checkState = [];
-    checkBlock.forEach((el) => {
+    checkboxesArr.forEach((el) => {
       if (el.checked) {
         checkState.push(true);
       } else {
@@ -130,8 +122,7 @@ checkBlock.forEach((elem) => {
 });
 
 answerBtn.addEventListener(`click`, () => {
-  // случайный результат игры отображать
-  switchScreen(resultWinElement);
+  switchScreen(resultExpireChanceElement);
 });
 
 const playAgainLink = document.querySelector(`.play-again__wrap`);

@@ -1,4 +1,5 @@
-import {render} from "./util";
+import {render, switchScreen} from "./util";
+import {welcomeScreenElement} from "./welcomeScreen";
 
 const resultTimeout = `<section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
@@ -9,6 +10,12 @@ const resultTimeout = `<section class="main main--result">
   </section>`;
 
 const resultTimeoutElement = render(resultTimeout);
+switchScreen(resultTimeoutElement);
+
+const replayBtn = document.querySelector(`.main-replay`);
+replayBtn.addEventListener(`click`, () => {
+  switchScreen(welcomeScreenElement);
+});
 
 export {resultTimeoutElement};
 
