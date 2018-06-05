@@ -10,13 +10,13 @@ const answersArr = Array.from(answers);
 
 answersArr.forEach((el) => {
   el.addEventListener(`click`, () => {
-    switchScreen(secondGameScreen);
+    switchScreen(secondGameScreenElement);
   });
 });
 
 const playAgainLink = firstGameScreen.querySelector(`.play-again__wrap`);
 playAgainLink.addEventListener(`click`, () => {
-  switchScreen(welcomeScreen);
+  switchScreen(welcomeScreenElement);
 });
 
-export default firstGameScreen;
+export default firstGameScreenElement;
