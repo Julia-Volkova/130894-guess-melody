@@ -1,20 +1,14 @@
-import {render, switchScreen} from "./util";
-import {welcomeScreenElement} from "./welcomeScreen";
+import switchScreen from "./util";
+import welcomeScreen from "./welcomeScreen";
 
-const resultExpireChance = `<section class="main main--result">
-    <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
+const templates = document.querySelector(`#templates`).content;
+const results = templates.querySelectorAll(`.main--result`);
+const resultsArr = Array.from(results);
+const resultExpireChance = resultsArr[2];
 
-    <h2 class="title">Какая жалость!</h2>
-    <div class="main-stat">У вас закончились все попытки.<br>Ничего, повезёт в следующий раз!</div>
-    <span role="button" tabindex="0" class="main-replay">Попробовать ещё раз</span>
-  </section>`;
-
-const resultExpireChanceElement = render(resultExpireChance);
-switchScreen(resultExpireChanceElement);
-
-const replayBtn = document.querySelector(`.main-replay`);
+const replayBtn = resultExpireChance.querySelector(`.main-replay`);
 replayBtn.addEventListener(`click`, () => {
-  switchScreen(welcomeScreenElement);
+  switchScreen(welcomeScreen);
 });
 
-export {resultExpireChanceElement};
+export default resultExpireChance;

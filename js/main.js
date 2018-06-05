@@ -1,4 +1,4 @@
-import {switchScreen} from "./util";
-import {welcomeScreenElement} from "./welcomeScreen";
+import switchScreen from "./util";
+import welcomeScreen from "./welcomeScreen";
 
-switchScreen(welcomeScreenElement);
+switchScreen(welcomeScreen);

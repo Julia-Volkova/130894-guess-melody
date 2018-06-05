@@ -27,9 +27,9 @@ gulp.task(`style`, () => {
   ])).pipe(gulp.dest(`build/css`)).pipe(server.stream()).pipe(minify()).pipe(rename(`style.min.css`)).pipe(gulp.dest(`build/css`));
 });
 
-gulp.task(`scripts`, () => {
-  return gulp.src(`js/**/*.js`).pipe(plumber()).pipe(gulp.dest(`build/js/`));
-});
+// gulp.task(`scripts`, () => {
+//   return gulp.src(`js/**/*.js`).pipe(plumber()).pipe(gulp.dest(`build/js/`));
+// });
 
 gulp.task(`imagemin`, [`copy`], () => {
   return gulp.src(`build/img/**/*.{jpg,png,gif}`).pipe(imagemin([
