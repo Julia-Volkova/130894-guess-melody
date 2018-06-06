@@ -1,5 +1,6 @@
 import {render, switchScreen} from "./util";
-import resultExpireChanceElement from "./resultExpireChance";
+// import resultExpireChanceElement from "./resultExpireChance";
+import resultTimeoutElement from "./resultTimeout";
 import welcomeScreenElement from "./welcomeScreen";
 
 const secondGameScreen = ` <section class="main main--level main--level-genre">
@@ -121,7 +122,7 @@ checkboxesArr.forEach((elem) => {
 });
 
 answerBtn.addEventListener(`click`, () => {
-  switchScreen(resultExpireChanceElement);
+  switchScreen(resultTimeoutElement);
 });
 
 const playAgainLink = secondGameScreenElement.querySelector(`.play-again__wrap`);
