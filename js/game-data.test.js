@@ -32,11 +32,28 @@ describe(`Show result window`, () => {
 });
 
 describe(`Timer`, () => {
+  it(`should return count reduced by one`, () => {
+    assert.equal(timeCount(300).tick(), 299);
+    assert.equal(timeCount(768).tick(), 767);
+    assert.equal(timeCount(99).tick(), 98);
+  });
   it(`should return time object`, () => {
-    assert.equal(timeCount(300), {remainingTime: 299, isTimeout: false});
-    assert.equal(timeCount(768), {remainingTime: 767, isTimeout: false});
-    assert.equal(timeCount(99), {remainingTime: 98, isTimeout: false});
-    assert.equal(timeCount(1), {remainingTime: 0, isTimeout: true});
+    assert.equal(timeCount(1), {
+      remainingTime: 1,
+      isTimeout: false,
+      tick: function () {
+        if (this.remainingTime > 0) {
+          return this.remainingTime -= 1;
+        } else if (this.remainingTime === 0) {
+          alert(`Время вышло!`);
+          return this.isTimeout = true;
+        } else if (this.remainingTime === 1) {
+          alert(`Время вышло!`);
+          this.remainingTime -= 1;
+          return this.isTimeout = true;
+        }
+      }
+    });
   });
 });
 

@@ -48,21 +48,20 @@ const showResultScreen = (otherResults, yourResult) => {
 const timeCount = (startTime) => {
   let time = {
     remainingTime: startTime,
-    isTimeout: false
-  };
-  const tick = () => {
-    if (time.remainingTime > 0) {
-      time.remainingTime -= 1;
-    } else if (time.remainingTime === 0) {
-      time.isTimeout = true;
-      alert(`Время вышло!`);
-    } else if (time.remainingTime === 1) {
-      time.remainingTime -= 1;
-      time.isTimeout = true;
-      alert(`Время вышло!`);
+    isTimeout: false,
+    tick: function () {
+      if (this.remainingTime > 0) {
+        return this.remainingTime -= 1;
+      } else if (this.remainingTime === 0) {
+        alert(`Время вышло!`);
+        return this.isTimeout = true;
+      } else if (this.remainingTime === 1) {
+        alert(`Время вышло!`);
+        this.remainingTime -= 1;
+        return this.isTimeout = true;
+      }
     }
   };
-  tick();
   return time;
 };
 
