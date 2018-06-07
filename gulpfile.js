@@ -105,7 +105,6 @@ gulp.task(`test`, function () {
         ]}, `cjs`))
       .pipe(gulp.dest(`build/test`))
       .pipe(mocha({
-        reporter: `spec`,
-        ui: 'tdd'
+        reporter: `spec`
       }));
 });

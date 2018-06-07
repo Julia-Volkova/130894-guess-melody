@@ -1,25 +1,23 @@
 export const INITIAL_GAME = {
   points: 0,
   level: 0,
-  lives: 2,
+  lives: 3,
   time: 0
 };
-
-let restantLives = INITIAL_GAME.lives;
 
 const calcScores = (answers, lives) => {
   let points = 0;
   answers.forEach((elem) => {
-    if (elem.text === true && elem.time >= 30 && lives >= 0) {
+    if (elem.right === true && elem.time >= 30 && lives >= 0) {
       points++;
-    } else if (elem.text === true && elem.time < 30 && lives >= 0) {
+    } else if (elem.right === true && elem.time < 30 && lives >= 0) {
       points += 2;
-    } else if (elem.text === false && lives >= 0) {
+    } else if (elem.right === false && lives >= 0) {
       points -= 2;
     }
   });
 
-  if (answers.length < 10 && lives === restantLives) {
+  if (answers.length < 10 && lives > 0) {
     return -1;
   }
 
@@ -30,4 +28,42 @@ const calcScores = (answers, lives) => {
   return points;
 };
 
-export {calcScores};
+const showResultScreen = (otherResults, yourResult) => {
+  if (yourResult.time === 0) {
+    return `Время вышло! Вы не успели отгадать все мелодии`;
+  } else if (yourResult.lives === 0) {
+    return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
+  } else {
+    otherResults.push(yourResult.points);
+    let filteredResults = otherResults.sort((a, b) => b - a);
+    let yourIndex = filteredResults.indexOf(yourResult.points);
+    let place = yourIndex + 1;
+    let gamerCount = filteredResults.length;
+    let fractional = ((gamerCount - 1) - yourIndex) / gamerCount;
+    let gamerProcent = (Math.ceil((fractional) * 100) / 100) * 100;
+    return `Вы заняли ${place} место из ${gamerCount} игроков. Это лучше, чем у ${gamerProcent}% игроков`;
+  }
+};
+
+const timeCount = (startTime) => {
+  let time = {
+    remainingTime: startTime,
+    isTimeout: false
+  };
+  const tick = () => {
+    if (time.remainingTime > 0) {
+      time.remainingTime -= 1;
+    } else if (time.remainingTime === 0) {
+      time.isTimeout = true;
+      alert(`Время вышло!`);
+    } else if (time.remainingTime === 1) {
+      time.remainingTime -= 1;
+      time.isTimeout = true;
+      alert(`Время вышло!`);
+    }
+  };
+  tick();
+  return time;
+};
+
+export {calcScores, showResultScreen, timeCount};
