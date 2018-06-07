@@ -49,17 +49,19 @@ const timeCount = (startTime) => {
   let time = {
     remainingTime: startTime,
     isTimeout: false,
-    tick: function () {
+    tick() {
       if (this.remainingTime > 0) {
-        return this.remainingTime -= 1;
-      } else if (this.remainingTime === 0) {
-        alert(`Время вышло!`);
-        return this.isTimeout = true;
-      } else if (this.remainingTime === 1) {
-        alert(`Время вышло!`);
         this.remainingTime -= 1;
-        return this.isTimeout = true;
+        return this.remainingTime;
+      } else if (this.remainingTime === 0) {
+        this.isTimeout = true;
+        return false;
+      } else if (this.remainingTime === 1) {
+        this.remainingTime -= 1;
+        this.isTimeout = true;
+        return false;
       }
+      return false;
     }
   };
   return time;
