@@ -6,6 +6,10 @@ export const INITIAL_GAME = {
 };
 
 const calcScores = (answers, lives) => {
+  if (answers.length < 10 && lives > 0 || lives === 0) {
+    return -1;
+  }
+
   let points = 0;
   answers.forEach((elem) => {
     if (elem.correct && elem.time >= 30) {
@@ -16,10 +20,6 @@ const calcScores = (answers, lives) => {
       points -= 2;
     }
   });
-
-  if (answers.length < 10 && lives > 0) {
-    return -1;
-  }
 
   if (points < 0) {
     points = 0;
@@ -52,11 +52,9 @@ const timeCount = (startTime) => {
     tick() {
       if (this.remainingTime > 0) {
         this.remainingTime -= 1;
-        return this.remainingTime;
-      } else {
-        this.isTimeout = (this.remainingTime === 0);
-        return this.remainingTime;
       }
+      this.isTimeout = (this.remainingTime === 0);
+      return this.remainingTime;
     }
   };
   if (startTime === 0) {

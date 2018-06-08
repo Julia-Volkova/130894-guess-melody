@@ -200,25 +200,6 @@ const gameResultTestFive = [
   }
 ];
 
-const gameResultTestSix = [
-  {
-    correct: true,
-    time: 30
-  },
-  {
-    correct: false,
-    time: 30
-  },
-  {
-    correct: false,
-    time: 30
-  },
-  {
-    correct: false,
-    time: 15
-  }
-];
-
 const finalResultsOne = {
   points: 18,
   lives: 2,
@@ -254,13 +235,10 @@ describe(`Calcul scores`, () => {
     assert.equal(calcScores(gameResultTestOne, 3), 10);
     assert.equal(calcScores(gameResultTestTwo, 2), 11);
     assert.equal(calcScores(gameResultTestThree, 1), 7);
-    assert.equal(calcScores(gameResultTestFour, 0), 5);
   });
-  it(`should return -1, if game culminate earlier`, () => {
+  it(`should return -1, if game culminate earlier or lives end`, () => {
     assert.equal(calcScores(gameResultTestFive, 2), -1);
-  });
-  it(`should return 0, if scores are negative`, () => {
-    assert.equal(calcScores(gameResultTestSix, 0), 0);
+    assert.equal(calcScores(gameResultTestFour, 0), -1);
   });
 });
 
@@ -315,6 +293,7 @@ describe(`Timer`, () => {
     assert.equal(timeCount(330).remainingTime, 330);
     assert.equal(timeCount(840).remainingTime, 840);
     assert.equal(timeCount(160).remainingTime, 160);
+    assert.equal(timeCount(1).remainingTime, 1);
   });
   it(`timer stop when time out`, () => {
     assert.equal(timeCount(0).isTimeout, true);
