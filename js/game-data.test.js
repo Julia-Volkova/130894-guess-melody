@@ -267,15 +267,40 @@ describe(`Calcul scores`, () => {
 
 describe(`Show result window`, () => {
   it(`should return positive result and place`, () => {
-    assert.equal(showResultScreen([1, 17, 3, 6, 19, 15, 4, 2], finalResultsOne), `Вы заняли 2 место из 9 игроков. Это лучше, чем у 78% игроков`);
-    assert.equal(showResultScreen([1, 17, 3, 14], finalResultsTwo), `Вы заняли 1 место из 5 игроков. Это лучше, чем у 80% игроков`);
-    assert.equal(showResultScreen([1, 17, 3, 14, 13, 4, 20, 11, 2, 18, 6, 19], finalResultsThree), `Вы заняли 9 место из 13 игроков. Это лучше, чем у 31% игроков`);
+    assert.equal(showResultScreen(
+        [1, 17, 3, 6, 19, 15, 4, 2],
+        finalResultsOne
+    ),
+    `Вы заняли 2 место из 9 игроков. Это лучше, чем у 78% игроков`
+    );
+    assert.equal(showResultScreen(
+        [1, 17, 3, 14],
+        finalResultsTwo
+    ),
+    `Вы заняли 1 место из 5 игроков. Это лучше, чем у 80% игроков`
+    );
+    assert.equal(showResultScreen(
+        [1, 17, 3, 14, 13, 4, 20, 11, 2, 18, 6, 19],
+        finalResultsThree
+    ),
+    `Вы заняли 9 место из 13 игроков. Это лучше, чем у 31% игроков`
+    );
   });
   it(`should say, that time out`, () => {
-    assert.equal(showResultScreen([1, 18, 3, 6, 19, 15, 4, 2], finalResultsFour), `Время вышло! Вы не успели отгадать все мелодии`);
+    assert.equal(showResultScreen(
+        [1, 18, 3, 6, 19, 15, 4, 2],
+        finalResultsFour
+    ),
+    `Время вышло! Вы не успели отгадать все мелодии`
+    );
   });
   it(`should say, that end lives`, () => {
-    assert.equal(showResultScreen([1, 14, 18, 3], finalResultsFive), `У вас закончились все попытки. Ничего, повезёт в следующий раз!`);
+    assert.equal(showResultScreen(
+        [1, 14, 18, 3],
+        finalResultsFive
+    ),
+    `У вас закончились все попытки. Ничего, повезёт в следующий раз!`
+    );
   });
 });
 

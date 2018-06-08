@@ -7,13 +7,12 @@ export const INITIAL_GAME = {
 
 const calcScores = (answers, lives) => {
   let points = 0;
-  const liveCount = lives >= 0;
   answers.forEach((elem) => {
-    if (elem.correct && elem.time >= 30 && liveCount) {
+    if (elem.correct && elem.time >= 30) {
       points++;
-    } else if (elem.correct && elem.time < 30 && liveCount) {
+    } else if (elem.correct && elem.time < 30) {
       points += 2;
-    } else if (!elem.correct && liveCount) {
+    } else if (!elem.correct) {
       points -= 2;
     }
   });
@@ -53,9 +52,6 @@ const timeCount = (startTime) => {
     tick() {
       if (this.remainingTime > 0) {
         this.remainingTime -= 1;
-      }
-
-      if (this.remainingTime > 0) {
         return this.remainingTime;
       } else {
         this.isTimeout = (this.remainingTime === 0);
