@@ -7,6 +7,6 @@ export const render = (str) => {
 };
 
 export const switchScreen = (element) => {
-  main.innerHTML = ``;
+  // main.innerHTML = ``;
   main.appendChild(element);
 };

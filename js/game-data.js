@@ -1,8 +1,52 @@
-export const INITIAL_GAME = {
+const initialState = {
   points: 0,
-  level: 0,
   lives: 3,
-  time: 0
+  time: 0,
+  level: `level-6`
+};
+
+const levelPerformer = {
+  'level-1': {
+    audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+    answers: [
+      {
+        pic: `https://f4.bcbits.com/img/0004181452_10.jpg`,
+        artist: `Gunnar Olsen`
+      },
+      {
+        pic: `https://i.vimeocdn.com/portrait/992615_300x300`,
+        artist: `Jingle Punks`
+      },
+      {
+        pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
+        artist: `Riot`
+      }
+    ]
+  }
+};
+
+const levelGenre = {
+  'level-6': {
+    genre: ``,
+    answers: [
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`
+      }
+    ]
+  }
 };
 
 const calcScores = (answers, lives) => {
@@ -64,4 +108,4 @@ const timeCount = (startTime) => {
   return time;
 };
 
-export {calcScores, showResultScreen, timeCount};
+export {levelPerformer, levelGenre, initialState, calcScores, showResultScreen, timeCount};
