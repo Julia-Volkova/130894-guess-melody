@@ -1,7 +1,10 @@
-import {render} from "./util";
-// import firstGameScreenElement from "./firstGameScreen";
+import {render, switchScreen, clearAndSwitchScreen} from "./util";
+import {currentState, levelPerformer} from "./game-data";
+import headerElement from "./header";
+import performerElement from "./performerTemplate";
 
-const welcomeScreen = `<section class="main main--welcome">
+export default () => {
+  const welcomeScreen = `<section class="main main--welcome">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
     <button class="main-play">Начать игру</button>
     <h2 class="title main-title">Правила игры</h2>
@@ -12,13 +15,14 @@ const welcomeScreen = `<section class="main main--welcome">
     </p>
   </section>`;
 
-const welcomeScreenElement = render(welcomeScreen);
+  const welcomeScreenElement = render(welcomeScreen);
 
-// const playBtn = welcomeScreenElement.querySelector(`.main-play`);
-// playBtn.addEventListener(`click`, () => {
-//   switchScreen(firstGameScreenElement);
-// });
+  const playBtn = welcomeScreenElement.querySelector(`.main-play`);
+  playBtn.addEventListener(`click`, () => {
+    currentState.level++;
+    clearAndSwitchScreen(headerElement(currentState));
+    switchScreen(performerElement(levelPerformer[currentState.level]));
+  });
 
-export default welcomeScreenElement;
-
-
+  return welcomeScreenElement;
+};

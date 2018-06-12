@@ -1,7 +1,8 @@
-import {render, switchScreen} from "./util";
+import {render, clearAndSwitchScreen, backToInitialState} from "./util";
 import welcomeScreenElement from "./welcomeScreen";
 
-const resultExpireChance = `<section class="main main--result">
+export default function renderResultExpireChance() {
+  const resultExpireChance = `<section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
     <h2 class="title">Какая жалость!</h2>
@@ -9,11 +10,14 @@ const resultExpireChance = `<section class="main main--result">
     <span role="button" tabindex="0" class="main-replay">Попробовать ещё раз</span>
   </section>`;
 
-const resultExpireChanceElement = render(resultExpireChance);
+  const resultExpireChanceElement = render(resultExpireChance);
 
-const replayBtn = resultExpireChanceElement.querySelector(`.main-replay`);
-replayBtn.addEventListener(`click`, () => {
-  switchScreen(welcomeScreenElement);
-});
+  const replayBtn = resultExpireChanceElement.querySelector(`.main-replay`);
+  replayBtn.addEventListener(`click`, () => {
+    clearAndSwitchScreen(welcomeScreenElement());
+    backToInitialState();
+  });
 
-export default resultExpireChanceElement;
+  return resultExpireChanceElement;
+}
+

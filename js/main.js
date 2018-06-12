@@ -1,20 +1,9 @@
-// import {switchScreen} from "./util";
-// import welcomeScreenElement from "./welcomeScreen";
-import {performerElement} from "./performerTemplate";
-import {initialState} from "./game-data";
 import {switchScreen} from "./util";
-import {headerTemplate} from "./header";
-import {genreElement} from "./genreTemplate";
+import welcomeScreenElement from "./welcomeScreen";
+// import {calculateFinalResults} from "./computeFinalResult";
 
-switchScreen(performerElement);
-switchScreen(genreElement);
+switchScreen(welcomeScreenElement());
 
-const render = (str) => {
-  const wrapper = document.createElement(`div`);
-  wrapper.innerHTML = str.trim();
-  return wrapper;
-};
-
-switchScreen(render(headerTemplate(initialState)));
+// console.log(calculateFinalResults());
 
 

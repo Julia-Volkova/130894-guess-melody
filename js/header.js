@@ -1,7 +1,9 @@
-import {initialState} from "./game-data";
-import {render} from "./util";
+import {currentState} from "./game-data";
+import {render, clearAndSwitchScreen, backToInitialState} from "./util";
+import welcomeScreenElement from "./welcomeScreen";
 
-const headerTemplate = (state) => `
+export default function renderHeaderTemplate(step) {
+  const headerTemplate = (state) => `
 <a class="play-again play-again__wrap" href="#">
       <img class="play-again__img" src="/img/melody-logo-ginger.png" alt="logo" width="177" height="76">
     </a>
@@ -18,19 +20,18 @@ const headerTemplate = (state) => `
       </div>
     </svg>
     <div class="main-mistakes">
-    ${new Array(4 - state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``)}
+    ${new Array(3 - state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``)}
     </div>
 `;
 
-const headerElement = render(headerTemplate(initialState));
+  const headerElement = render(headerTemplate(currentState));
 
-// const element = render(headerTemplate(initialState));
-// const btn = element.querySelector(`.play-again`);
+  const btnPlayAgain = headerElement.querySelector(`.play-again__wrap`);
 
-// btn.addEventListener(`click`, () => {
-//
-// });
+  btnPlayAgain.addEventListener(`click`, () => {
+    clearAndSwitchScreen(welcomeScreenElement());
+    backToInitialState();
+  });
 
-export {headerElement, headerTemplate};
-
-
+  return headerElement;
+}

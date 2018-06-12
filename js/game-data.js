@@ -1,53 +1,244 @@
-const initialState = {
+let currentState = {
   points: 0,
   lives: 3,
-  time: 0,
-  level: `level-6`
+  time: 300,
+  level: 0
 };
 
 const levelPerformer = {
-  'level-1': {
+  '1': {
     audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
     answers: [
       {
         pic: `https://f4.bcbits.com/img/0004181452_10.jpg`,
-        artist: `Gunnar Olsen`
+        artist: `Gunnar Olsen`,
+        correct: true
       },
       {
         pic: `https://i.vimeocdn.com/portrait/992615_300x300`,
-        artist: `Jingle Punks`
+        artist: `Jingle Punks`,
+        correct: false
       },
       {
         pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
-        artist: `Riot`
+        artist: `Riot`,
+        correct: false
+      }
+    ]
+  },
+  '2': {
+    audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+    answers: [
+      {
+        pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
+        artist: `Riot`,
+        correct: false
+      },
+      {
+        pic: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
+        artist: `Kevin MacLeod`,
+        correct: false
+      },
+      {
+        pic: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
+        artist: `Audionautix`,
+        correct: true
+      }
+    ]
+  },
+  '3': {
+    audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+    answers: [
+      {
+        pic: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
+        artist: `Audionautix`,
+        correct: false
+      },
+      {
+        pic: `https://i.vimeocdn.com/portrait/992615_300x300`,
+        artist: `Jingle Punks`,
+        correct: true
+      },
+      {
+        pic: `https://f4.bcbits.com/img/0004181452_10.jpg`,
+        artist: `Gunnar Olsen`,
+        correct: false
+      }
+    ]
+  },
+  '4': {
+    audio: ``,
+    answers: [
+      {
+        pic: `https://i.vimeocdn.com/portrait/992615_300x300`,
+        artist: `Jingle Punks`,
+        correct: false
+      },
+      {
+        pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
+        artist: `Riot`,
+        correct: false
+      },
+      {
+        pic: `https://yt3.ggpht.com/-fkDeGauT7Co/AAAAAAAAAAI/AAAAAAAAAAA/dkF5ZKkrxRo/s900-c-k-no-mo-rj-c0xffffff/photo.jpg`,
+        artist: `Kevin MacLeod`,
+        correct: true
+      }
+    ]
+  },
+  '5': {
+    audio: ``,
+    answers: [
+      {
+        pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
+        artist: `Riot`,
+        correct: true
+      },
+      {
+        pic: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
+        artist: `Audionautix`,
+        correct: false
+      },
+      {
+        pic: `https://f4.bcbits.com/img/0004181452_10.jpg`,
+        artist: `Gunnar Olsen`,
+        correct: false
       }
     ]
   }
 };
 
 const levelGenre = {
-  'level-6': {
-    genre: ``,
+  '6': {
+    genre: `Jazz`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
-        genre: `Pop`
+        genre: `Electronic`,
+        correct: false
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `R&B`,
+        correct: false
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+        genre: `Jazz`,
+        correct: true
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`,
+        correct: false
+      }
+    ]
+  },
+  '7': {
+    genre: `Electronic`,
+    answers: [
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Electronic`,
+        correct: true
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`,
+        correct: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
-        genre: `Pop`
+        genre: `Pop`,
+        correct: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
-        genre: `Pop`
+        genre: `Electronic`,
+        correct: true
+      }
+    ]
+  },
+  '8': {
+    genre: `Country`,
+    answers: [
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+        genre: `R&B`,
+        correct: false
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`,
+        correct: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
-        genre: `Pop`
+        genre: `Electronic`,
+        correct: false
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`,
+        correct: true
+      }
+    ]
+  },
+  '9': {
+    genre: `Pop`,
+    answers: [
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`,
+        correct: true
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`,
+        correct: true
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
+        genre: `Jazz`,
+        correct: false
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`,
+        correct: false
+      }
+    ]
+  },
+  '10': {
+    genre: `Rock`,
+    answers: [
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+        genre: `Country`,
+        correct: false
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Pop`,
+        correct: false
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
+        genre: `Rock`,
+        correct: true
+      },
+      {
+        audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+        genre: `Electronic`,
+        correct: false
       }
     ]
   }
 };
+
+let results = [];
+
+let finalResults = {};
 
 const calcScores = (answers, lives) => {
   if (answers.length < 10 && lives > 0 || lives === 0) {
@@ -84,8 +275,8 @@ const showResultScreen = (otherResults, yourResult) => {
     let place = yourIndex + 1;
     let gamerCount = filteredResults.length;
     let fractional = ((gamerCount - 1) - yourIndex) / gamerCount;
-    let gamerProcent = (Math.ceil((fractional) * 100) / 100) * 100;
-    return `Вы заняли ${place} место из ${gamerCount} игроков. Это лучше, чем у ${gamerProcent}% игроков`;
+    let gamerPercent = (Math.ceil((fractional) * 100) / 100) * 100;
+    return `Вы заняли ${place} место из ${gamerCount} игроков. Это лучше, чем у ${gamerPercent}% игроков`;
   }
 };
 
@@ -108,4 +299,4 @@ const timeCount = (startTime) => {
   return time;
 };
 
-export {levelPerformer, levelGenre, initialState, calcScores, showResultScreen, timeCount};
+export {levelPerformer, levelGenre, currentState, results, finalResults, calcScores, showResultScreen, timeCount};

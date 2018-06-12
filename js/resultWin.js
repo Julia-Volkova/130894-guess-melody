@@ -1,22 +1,26 @@
-import {render, switchScreen} from "./util";
+import {render, clearAndSwitchScreen, backToInitialState} from "./util";
 import welcomeScreenElement from "./welcomeScreen";
+import {currentState} from "./game-data";
 
-const resultWin = `<section class="main main--result">
+export default function (ojb) {
+  const resultWin = (obj) => `<section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
     <h2 class="title">Вы настоящий меломан!</h2>
     <div class="main-stat">За&nbsp;3&nbsp;минуты и 25&nbsp;секунд
-      <br>вы&nbsp;набрали 12 баллов (8 быстрых)
-      <br>совершив 3 ошибки</div>
-    <span class="main-comparison">Вы заняли 2 место из 10. Это&nbsp;лучше чем у&nbsp;80%&nbsp;игроков</span>
+      <br>вы&nbsp;набрали ${obj.points} баллов (${obj.fastAnswers} быстрых)
+      <br>совершив ${3 - obj.lives} ошибки</div>
+    <span class="main-comparison">${obj.statistics}</span>
     <span role="button" tabindex="0" class="main-replay">Сыграть ещё раз</span>
   </section>`;
 
-const resultWinElement = render(resultWin);
+  const resultWinElement = render(resultWin(currentState));
 
-const replayBtn = resultWinElement.querySelector(`.main-replay`);
-replayBtn.addEventListener(`click`, () => {
-  switchScreen(welcomeScreenElement);
-});
+  const replayBtn = resultWinElement.querySelector(`.main-replay`);
+  replayBtn.addEventListener(`click`, () => {
+    clearAndSwitchScreen(welcomeScreenElement());
+    backToInitialState();
+  });
 
-export default resultWinElement;
+  return resultWinElement;
+}

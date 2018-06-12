@@ -1,7 +1,8 @@
-import {render, switchScreen} from "./util";
+import {render, clearAndSwitchScreen, backToInitialState} from "./util";
 import welcomeScreenElement from "./welcomeScreen";
 
-const resultTimeout = `<section class="main main--result">
+export default function renderResultTimeout() {
+  const resultTimeout = `<section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
     <h2 class="title">Увы и ах!</h2>
@@ -9,12 +10,13 @@ const resultTimeout = `<section class="main main--result">
     <span role="button" tabindex="0" class="main-replay">Попробовать ещё раз</span>
   </section>`;
 
-const resultTimeoutElement = render(resultTimeout);
+  const resultTimeoutElement = render(resultTimeout);
 
-const replayBtn = resultTimeoutElement.querySelector(`.main-replay`);
-replayBtn.addEventListener(`click`, () => {
-  switchScreen(welcomeScreenElement);
-});
+  const replayBtn = resultTimeoutElement.querySelector(`.main-replay`);
+  replayBtn.addEventListener(`click`, () => {
+    clearAndSwitchScreen(welcomeScreenElement());
+    backToInitialState();
+  });
 
-export default resultTimeoutElement;
-
+  return resultTimeoutElement;
+}
