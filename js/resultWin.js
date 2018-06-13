@@ -1,9 +1,8 @@
 import {render, clearAndSwitchScreen, backToInitialState} from "./util";
 import welcomeScreenElement from "./welcomeScreen";
-import {currentState} from "./game-data";
 
-export default function (ojb) {
-  const resultWin = (obj) => `<section class="main main--result">
+export default function (obj) {
+  const resultWin = `<section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
     <h2 class="title">Вы настоящий меломан!</h2>
@@ -14,7 +13,7 @@ export default function (ojb) {
     <span role="button" tabindex="0" class="main-replay">Сыграть ещё раз</span>
   </section>`;
 
-  const resultWinElement = render(resultWin(currentState));
+  const resultWinElement = render(resultWin);
 
   const replayBtn = resultWinElement.querySelector(`.main-replay`);
   replayBtn.addEventListener(`click`, () => {

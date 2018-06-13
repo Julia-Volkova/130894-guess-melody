@@ -5,17 +5,18 @@ import renderResultExpireChance from "./resultExpireChance";
 import renderResultTimeout from "./resultTimeout";
 import resultWinElement from "./resultWin";
 import {calculateFinalResults} from "./computeFinalResult";
+import controlPlayer from "./controlPlayer";
 
-export default function renderGenreTemplate(step) {
-  const genreTemplate = (level) => `
-    <div class="main-wrap">
+export default function renderGenreTemplate(level) {
+  const genreTemplate =
+    `<div class="main-wrap">
       <h2 class="title">Выберите ${level.genre} треки</h2>
       <form class="genre">
            
         <div class="genre-answer">
           <div class="player-wrapper">
             <div class="player">
-              <audio src="${level.answers[0].audio}"></audio>
+              <audio src="${level.answers[0].audio}" autoplay></audio>
               <button class="player-control player-control--pause"></button>
               <div class="player-track">
                 <span class="player-status"></span>
@@ -73,13 +74,21 @@ export default function renderGenreTemplate(step) {
     </div>
 `;
 
-  const genreElement = render(genreTemplate(levelGenre[currentState.level]));
+  const genreElement = render(genreTemplate);
 
   const playerChecks = genreElement.querySelectorAll(`.genre-answer input`);
   const btnAnswered = genreElement.querySelector(`.genre-answer-send`);
-  btnAnswered.setAttribute(`disabled`, `disabled`);
+  const playerControls = genreElement.querySelectorAll(`.player-control`);
   let checkState = [];
   let checkOne;
+
+  [...playerControls].forEach((elem) => {
+    let audio = elem.previousElementSibling;
+    controlPlayer(elem, audio);
+  });
+
+
+  btnAnswered.setAttribute(`disabled`, `disabled`);
   [...playerChecks].forEach((elem) => {
     elem.addEventListener(`click`, () => {
       checkState = [];
@@ -103,15 +112,13 @@ export default function renderGenreTemplate(step) {
     });
   });
 
-
   btnAnswered.addEventListener(`click`, (evt) => {
     evt.preventDefault();
     currentState.level++;
-    console.log(`Уровень: ${currentState.level}`);
 
     let currentCorrect = () => {
       let answers = [];
-      let result = '';
+      let result = ``;
       [...playerChecks].forEach((elem) => {
         let correct = elem.getAttribute(`data-correct`);
         let isCorrect = (correct === `true`);
@@ -119,7 +126,6 @@ export default function renderGenreTemplate(step) {
           answers.push(isCorrect);
         }
       });
-      console.log(answers);
       result = answers.every((el) => {
         return el === true;
       });
@@ -131,7 +137,6 @@ export default function renderGenreTemplate(step) {
       time: 30
     };
     results.push(currentAnswer);
-    console.log(results);
     if (currentAnswer.correct === false) {
       currentState.lives--;
     }
@@ -153,4 +158,3 @@ export default function renderGenreTemplate(step) {
 
   return genreElement;
 }
-

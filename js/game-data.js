@@ -67,7 +67,7 @@ const levelPerformer = {
     ]
   },
   '4': {
-    audio: ``,
+    audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
     answers: [
       {
         pic: `https://i.vimeocdn.com/portrait/992615_300x300`,
@@ -87,7 +87,7 @@ const levelPerformer = {
     ]
   },
   '5': {
-    audio: ``,
+    audio: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
     answers: [
       {
         pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,

@@ -1,10 +1,9 @@
-import {currentState} from "./game-data";
 import {render, clearAndSwitchScreen, backToInitialState} from "./util";
 import welcomeScreenElement from "./welcomeScreen";
 
-export default function renderHeaderTemplate(step) {
-  const headerTemplate = (state) => `
-<a class="play-again play-again__wrap" href="#">
+export default function renderHeaderTemplate(state) {
+  const headerTemplate =
+    `<a class="play-again play-again__wrap" href="#">
       <img class="play-again__img" src="/img/melody-logo-ginger.png" alt="logo" width="177" height="76">
     </a>
     <svg xmlns="http://www.w3.org/2000/svg" class="timer" viewBox="0 0 780 780">
@@ -24,7 +23,7 @@ export default function renderHeaderTemplate(step) {
     </div>
 `;
 
-  const headerElement = render(headerTemplate(currentState));
+  const headerElement = render(headerTemplate);
 
   const btnPlayAgain = headerElement.querySelector(`.play-again__wrap`);
 

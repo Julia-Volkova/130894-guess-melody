@@ -4,14 +4,15 @@ import renderHeaderTemplate from "./header";
 import renderGenreElement from "./genreTemplate";
 import renderResultExpireChance from "./resultExpireChance";
 import renderResultTimeout from "./resultTimeout";
+import controlPlayer from "./controlPlayer";
 
-export default function renderPerformerTemplate(step) {
-  const performerTemplate = (stage) =>
+export default function renderPerformerTemplate(stage) {
+  const performerTemplate =
     `<div class="main-wrap">
       <h2 class="title main-title">Кто исполняет эту песню?</h2>
       <div class="player-wrapper">
         <div class="player">
-          <audio src="${stage.audio}"></audio>
+          <audio src="${stage.audio}" autoplay></audio>
           <button class="player-control player-control--pause"></button>
           <div class="player-track">
             <span class="player-status"></span>
@@ -19,45 +20,30 @@ export default function renderPerformerTemplate(step) {
         </div>
       </div>
       <form class="main-list">
-
-        <div class="main-answer-wrapper" data-correct="${stage.answers[0].correct}">
-          <input class="main-answer-r" type="radio" id="answer-1" name="answer" value="val-1"/>
-          <label class="main-answer" for="answer-1">
-            <img class="main-answer-preview" src="${stage.answers[0].pic}"
-                 alt="${stage.answers[0].artist}" width="134" height="134">
-            ${stage.answers[0].artist}
-          </label>
-        </div>
-
-        <div class="main-answer-wrapper" data-correct="${stage.answers[1].correct}">
-          <input class="main-answer-r" type="radio" id="answer-2" name="answer" value="val-2"/>
-          <label class="main-answer" for="answer-2">
-            <img class="main-answer-preview" src="${stage.answers[1].pic}"
-                 alt="${stage.answers[1].artist}" width="134" height="134">
-            ${stage.answers[1].artist}
-          </label>
-        </div>
-
-        <div class="main-answer-wrapper" data-correct="${stage.answers[2].correct}">
-          <input class="main-answer-r" type="radio" id="answer-3" name="answer" value="val-3"/>
-          <label class="main-answer" for="answer-3">
-            <img class="main-answer-preview" src="${stage.answers[2].pic}"
-                 alt="${stage.answers[2].artist}" width="134" height="134">
-            ${stage.answers[2].artist}
-          </label>
-        </div>
-
+      ${stage.answers.map((answer) =>
+    `<div class="main-answer-wrapper" data-correct="${answer.correct}">
+      <input class="main-answer-r" type="radio" id="answer-1" name="answer" value="val-1"/>
+       <label class="main-answer" for="answer-1">
+      <img class="main-answer-preview" src="${answer.pic}"
+             alt="${answer.artist}" width="134" height="134">
+        ${answer.artist}
+     </label>
+     </div>`
+  ).join(``)}
       </form>
     </div>`;
 
-  const performerElement = render(performerTemplate(levelPerformer[currentState.level]));
+  const performerElement = render(performerTemplate);
 
   const answerElements = performerElement.querySelectorAll(`.main-answer-wrapper`);
-  const answerElementsArr = Array.from(answerElements);
-  answerElementsArr.forEach((answer) => {
+  const audio = performerElement.querySelector(`.player audio`);
+  const playerControl = performerElement.querySelector(`.player-control`);
+
+  controlPlayer(playerControl, audio);
+
+  [...answerElements].forEach((answer) => {
     answer.addEventListener(`click`, () => {
       currentState.level++;
-      console.log(`Уровень: ${currentState.level}`);
 
       let currentCorrect = answer.getAttribute(`data-correct`);
       let isCorrect = (currentCorrect === `true`);
@@ -66,7 +52,6 @@ export default function renderPerformerTemplate(step) {
         time: 30
       };
       results.push(currentAnswer);
-      console.log(results);
       if (isCorrect === false) {
         currentState.lives--;
       }

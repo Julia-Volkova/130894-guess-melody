@@ -5,7 +5,6 @@ const main = document.querySelector(`.main`);
 export const render = (str) => {
   const wrapper = document.createElement(`div`);
   wrapper.innerHTML = str.trim();
-  // return wrapper.firstChild;
   return wrapper;
 };
 

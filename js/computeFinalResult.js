@@ -17,7 +17,5 @@ export const calculateFinalResults = function () {
   currentState.fastAnswers = calcFastAnswers(results);
   currentState.statistics = statisticsInfo;
 
-  console.log(currentState);
-
   return currentState;
 };
