@@ -1,5 +1,5 @@
 import {render, switchScreen, clearAndSwitchScreen} from "./util";
-import {currentState, levelGenre, results} from "./game-data";
+import {currentState, levels, results} from "./game-data";
 import renderHeaderTemplate from "./header";
 import renderResultExpireChance from "./resultExpireChance";
 import renderResultTimeout from "./resultTimeout";
@@ -12,62 +12,22 @@ export default function renderGenreTemplate(level) {
     `<div class="main-wrap">
       <h2 class="title">Выберите ${level.genre} треки</h2>
       <form class="genre">
-           
-        <div class="genre-answer">
+      
+      ${level.answers.map((answer, i) =>
+    `<div class="genre-answer">
           <div class="player-wrapper">
             <div class="player">
-              <audio src="${level.answers[0].audio}" autoplay></audio>
-              <button class="player-control player-control--pause"></button>
+              <audio src="${answer.audio}" ${answer.autoplay ? `autoplay` : ``}></audio>
+              <button class="player-control ${answer.autoplay ? `player-control--pause` : `player-control--play`}"></button>
               <div class="player-track">
                 <span class="player-status"></span>
               </div>
             </div>
           </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-1" data-correct="${level.answers[0].correct}">
-          <label class="genre-answer-check" for="a-1"></label>
-        </div>
-
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio src="${level.answers[1].audio}"></audio>
-              <button class="player-control player-control--play"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-2" data-correct="${level.answers[1].correct}">
-          <label class="genre-answer-check" for="a-2"></label>
-        </div>
-
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio src="${level.answers[2].audio}"></audio>
-              <button class="player-control player-control--play"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-3" data-correct="${level.answers[2].correct}">
-          <label class="genre-answer-check" for="a-3"></label>
-        </div>
-
-        <div class="genre-answer">
-          <div class="player-wrapper">
-            <div class="player">
-              <audio src="${level.answers[3].audio}"></audio>
-              <button class="player-control player-control--play"></button>
-              <div class="player-track">
-                <span class="player-status"></span>
-              </div>
-            </div>
-          </div>
-          <input type="checkbox" name="answer" value="answer-1" id="a-4" data-correct="${level.answers[3].correct}">
-          <label class="genre-answer-check" for="a-4"></label>
-        </div>
+          <input type="checkbox" name="answer" value="answer-${i + 1}" id="a-${i + 1}" data-correct="${answer.correct}">
+          <label class="genre-answer-check" for="a-${i + 1}"></label>
+        </div>`
+  ).join(``)}
 
         <button class="genre-answer-send" type="submit">Ответить</button>
       </form>
@@ -152,7 +112,7 @@ export default function renderGenreTemplate(level) {
       switchScreen(resultWinElement(calculateFinalResults()));
     } else {
       clearAndSwitchScreen(renderHeaderTemplate(currentState));
-      switchScreen(renderGenreTemplate(levelGenre[currentState.level]));
+      switchScreen(renderGenreTemplate(levels[currentState.level]));
     }
   });
 

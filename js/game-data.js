@@ -5,9 +5,10 @@ let currentState = {
   level: 0
 };
 
-const levelPerformer = {
+const levels = {
   '1': {
     audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+    type: `performer`,
     answers: [
       {
         pic: `https://f4.bcbits.com/img/0004181452_10.jpg`,
@@ -28,6 +29,7 @@ const levelPerformer = {
   },
   '2': {
     audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
+    type: `performer`,
     answers: [
       {
         pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
@@ -48,6 +50,7 @@ const levelPerformer = {
   },
   '3': {
     audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+    type: `performer`,
     answers: [
       {
         pic: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
@@ -68,6 +71,7 @@ const levelPerformer = {
   },
   '4': {
     audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
+    type: `performer`,
     answers: [
       {
         pic: `https://i.vimeocdn.com/portrait/992615_300x300`,
@@ -88,6 +92,7 @@ const levelPerformer = {
   },
   '5': {
     audio: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
+    type: `performer`,
     answers: [
       {
         pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
@@ -105,140 +110,160 @@ const levelPerformer = {
         correct: false
       }
     ]
-  }
-};
-
-const levelGenre = {
+  },
   '6': {
     genre: `Jazz`,
+    type: `genre`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Electronic`,
-        correct: false
+        correct: false,
+        autoplay: true
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
         genre: `R&B`,
-        correct: false
+        correct: false,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
         genre: `Jazz`,
-        correct: true
+        correct: true,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
         genre: `Rock`,
-        correct: false
+        correct: false,
+        autoplay: false
       }
     ]
   },
   '7': {
     genre: `Electronic`,
+    type: `genre`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Electronic`,
-        correct: true
+        correct: true,
+        autoplay: true
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
         genre: `Country`,
-        correct: false
+        correct: false,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`,
-        correct: false
+        correct: false,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Electronic`,
-        correct: true
+        correct: true,
+        autoplay: false
       }
     ]
   },
   '8': {
     genre: `Country`,
+    type: `genre`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
         genre: `R&B`,
-        correct: false
+        correct: false,
+        autoplay: true
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
         genre: `Rock`,
-        correct: false
+        correct: false,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Electronic`,
-        correct: false
+        correct: false,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
         genre: `Country`,
-        correct: true
+        correct: true,
+        autoplay: false
       }
     ]
   },
   '9': {
     genre: `Pop`,
+    type: `genre`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`,
-        correct: true
+        correct: true,
+        autoplay: true
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`,
-        correct: true
+        correct: true,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
         genre: `Jazz`,
-        correct: false
+        correct: false,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
         genre: `Rock`,
-        correct: false
+        correct: false,
+        autoplay: false
       }
     ]
   },
   '10': {
     genre: `Rock`,
+    type: `genre`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
         genre: `Country`,
-        correct: false
+        correct: false,
+        autoplay: true
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Pop`,
-        correct: false
+        correct: false,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=dc3b4dc549becd6b`,
         genre: `Rock`,
-        correct: true
+        correct: true,
+        autoplay: false
       },
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
         genre: `Electronic`,
-        correct: false
+        correct: false,
+        autoplay: false
       }
     ]
   }
 };
 
 let results = [];
-
-let finalResults = {};
 
 const calcScores = (answers, lives) => {
   if (answers.length < 10 && lives > 0 || lives === 0) {
@@ -299,4 +324,4 @@ const timeCount = (startTime) => {
   return time;
 };
 
-export {levelPerformer, levelGenre, currentState, results, finalResults, calcScores, showResultScreen, timeCount};
+export {levels, currentState, results, calcScores, showResultScreen, timeCount};

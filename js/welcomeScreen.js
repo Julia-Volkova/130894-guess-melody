@@ -1,5 +1,5 @@
 import {render, switchScreen, clearAndSwitchScreen} from "./util";
-import {currentState, levelPerformer} from "./game-data";
+import {currentState, levels} from "./game-data";
 import headerElement from "./header";
 import performerElement from "./performerTemplate";
 
@@ -21,7 +21,7 @@ export default () => {
   playBtn.addEventListener(`click`, () => {
     currentState.level++;
     clearAndSwitchScreen(headerElement(currentState));
-    switchScreen(performerElement(levelPerformer[currentState.level]));
+    switchScreen(performerElement(levels[currentState.level]));
   });
 
   return welcomeScreenElement;
