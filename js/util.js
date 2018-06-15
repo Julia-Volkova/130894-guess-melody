@@ -3,24 +3,15 @@ import {currentState} from "./game-data";
 const main = document.querySelector(`.main`);
 
 export const render = (str) => {
-  const wrapper = document.createElement(`div`);
-  wrapper.innerHTML = str.trim();
-  return wrapper;
+  const template = document.createElement(`template`);
+  template.innerHTML = str.trim();
+  return template.content;
 };
 
-export const switchScreen = (element) => {
-  let collection = element.children;
-  [...collection].map((el) => {
-    main.appendChild(el);
-  });
-};
-
-export const clearAndSwitchScreen = (element) => {
+export const switchScreen = (element, header = document.createDocumentFragment()) => {
   main.innerHTML = ``;
-  let collection = element.children;
-  [...collection].map((el) => {
-    main.appendChild(el);
-  });
+  main.appendChild(header);
+  main.appendChild(element);
 };
 
 export const backToInitialState = () => {

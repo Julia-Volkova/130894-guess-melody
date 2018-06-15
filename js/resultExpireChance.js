@@ -1,4 +1,4 @@
-import {render, clearAndSwitchScreen, backToInitialState} from "./util";
+import {render, backToInitialState, switchScreen} from "./util";
 import welcomeScreenElement from "./welcomeScreen";
 
 export default function renderResultExpireChance() {
@@ -14,7 +14,7 @@ export default function renderResultExpireChance() {
 
   const replayBtn = resultExpireChanceElement.querySelector(`.main-replay`);
   replayBtn.addEventListener(`click`, () => {
-    clearAndSwitchScreen(welcomeScreenElement());
+    switchScreen(welcomeScreenElement());
     backToInitialState();
   });
 

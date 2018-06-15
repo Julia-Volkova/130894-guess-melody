@@ -1,4 +1,4 @@
-import {render, switchScreen, clearAndSwitchScreen} from "./util";
+import {render, switchScreen} from "./util";
 import {currentState, levels, results} from "./game-data";
 import renderHeaderTemplate from "./header";
 import renderResultExpireChance from "./resultExpireChance";
@@ -102,17 +102,13 @@ export default function renderGenreTemplate(level) {
     }
 
     if (currentState.lives === 0) {
-      clearAndSwitchScreen(renderHeaderTemplate(currentState));
-      switchScreen(renderResultExpireChance());
+      switchScreen(renderResultExpireChance(), renderHeaderTemplate(currentState));
     } else if (currentState.time === 0) {
-      clearAndSwitchScreen(renderHeaderTemplate(currentState));
-      switchScreen(renderResultTimeout());
+      switchScreen(renderResultTimeout(), renderHeaderTemplate(currentState));
     } else if (currentState.level === 11) {
-      clearAndSwitchScreen(renderHeaderTemplate(currentState));
-      switchScreen(resultWinElement(calculateFinalResults()));
+      switchScreen(resultWinElement(calculateFinalResults()), renderHeaderTemplate(currentState));
     } else {
-      clearAndSwitchScreen(renderHeaderTemplate(currentState));
-      switchScreen(renderGenreTemplate(levels[currentState.level]));
+      switchScreen(renderGenreTemplate(levels[currentState.level]), renderHeaderTemplate(currentState));
     }
   });
 

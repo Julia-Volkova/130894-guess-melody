@@ -1,6 +1,6 @@
-import {render, switchScreen, clearAndSwitchScreen} from "./util";
+import {render, switchScreen} from "./util";
 import {currentState, levels} from "./game-data";
-import headerElement from "./header";
+import renderHeaderTemplate from "./header";
 import performerElement from "./performerTemplate";
 
 export default () => {
@@ -20,8 +20,7 @@ export default () => {
   const playBtn = welcomeScreenElement.querySelector(`.main-play`);
   playBtn.addEventListener(`click`, () => {
     currentState.level++;
-    clearAndSwitchScreen(headerElement(currentState));
-    switchScreen(performerElement(levels[currentState.level]));
+    switchScreen(performerElement(levels[currentState.level]), renderHeaderTemplate(currentState));
   });
 
   return welcomeScreenElement;

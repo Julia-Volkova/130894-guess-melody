@@ -1,5 +1,6 @@
-import {render, clearAndSwitchScreen, backToInitialState} from "./util";
+import {render, switchScreen} from "./util";
 import welcomeScreenElement from "./welcomeScreen";
+import {backToInitialState} from "./util";
 
 export default function renderHeaderTemplate(state) {
   const headerTemplate =
@@ -28,7 +29,7 @@ export default function renderHeaderTemplate(state) {
   const btnPlayAgain = headerElement.querySelector(`.play-again__wrap`);
 
   btnPlayAgain.addEventListener(`click`, () => {
-    clearAndSwitchScreen(welcomeScreenElement());
+    switchScreen(welcomeScreenElement());
     backToInitialState();
   });
 

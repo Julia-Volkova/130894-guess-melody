@@ -263,6 +263,17 @@ const levels = {
   }
 };
 
+const statisticLose = {
+  livesEnd: {
+    'title': `Какая жалость!`,
+    'description': `У вас закончились все попытки.<br>Ничего, повезёт в следующий раз!`
+  },
+  timeEnds: {
+    'title': `Увы и ах!`,
+    'description': `Время вышло!<br>Вы не успели отгадать все мелодии`
+  }
+};
+
 let results = [];
 
 const calcScores = (answers, lives) => {
@@ -324,4 +335,4 @@ const timeCount = (startTime) => {
   return time;
 };
 
-export {levels, currentState, results, calcScores, showResultScreen, timeCount};
+export {levels, currentState, results, statisticLose, calcScores, showResultScreen, timeCount};

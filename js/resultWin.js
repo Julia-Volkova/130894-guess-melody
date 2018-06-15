@@ -1,4 +1,4 @@
-import {render, clearAndSwitchScreen, backToInitialState} from "./util";
+import {render, backToInitialState, switchScreen} from "./util";
 import welcomeScreenElement from "./welcomeScreen";
 
 export default function (obj) {
@@ -17,7 +17,7 @@ export default function (obj) {
 
   const replayBtn = resultWinElement.querySelector(`.main-replay`);
   replayBtn.addEventListener(`click`, () => {
-    clearAndSwitchScreen(welcomeScreenElement());
+    switchScreen(welcomeScreenElement());
     backToInitialState();
   });
 

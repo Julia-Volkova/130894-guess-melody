@@ -57,17 +57,13 @@ export default function renderPerformerTemplate(stage) {
       }
 
       if (currentState.lives === 0) {
-        clearAndSwitchScreen(renderHeaderTemplate(currentState));
-        switchScreen(renderResultExpireChance());
+        switchScreen(renderResultExpireChance(), renderHeaderTemplate(currentState));
       } else if (currentState.time === 0) {
-        clearAndSwitchScreen(renderHeaderTemplate(currentState));
-        switchScreen(renderResultTimeout());
+        switchScreen(renderResultTimeout(), renderHeaderTemplate(currentState));
       } else if (levels[currentState.level].type === `genre`) {
-        clearAndSwitchScreen(renderHeaderTemplate(currentState));
-        switchScreen(renderGenreElement(levels[currentState.level]));
+        switchScreen(renderGenreElement(levels[currentState.level]), renderHeaderTemplate(currentState));
       } else {
-        clearAndSwitchScreen(renderHeaderTemplate(currentState));
-        switchScreen(renderPerformerTemplate(levels[currentState.level]));
+        switchScreen(renderPerformerTemplate(levels[currentState.level]), renderHeaderTemplate(currentState));
       }
     });
   });
