@@ -73,7 +73,7 @@ export default class GenreView extends AbstractView {
     });
   }
 
-  onSwitch(evt) {
+  onSwitch() {
 
   }
 }

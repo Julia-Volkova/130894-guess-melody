@@ -48,7 +48,7 @@ export default class PerformerView extends AbstractView {
     });
   }
 
-  onSwitch(evt) {
+  onSwitch() {
 
   }
 }
