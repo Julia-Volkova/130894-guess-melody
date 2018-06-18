@@ -23,7 +23,7 @@ export default class ResultLose extends AbstractView {
     });
   }
 
-  static onSwitch() {
+  onSwitch() {
 
   }
 }

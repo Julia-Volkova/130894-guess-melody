@@ -1,12 +1,5 @@
 import AbstractView from "./abstract-view";
-import {currentState, levels, results} from "./game-data";
-import renderResultExpireChance from "./resultExpireChance";
 import controlPlayer from "./controlPlayer";
-import renderGenreElement from "./genreTemplate";
-import renderPerformerTemplate from "./performerTemplate";
-import {clearAndSwitchScreen, switchScreen} from "./util";
-import renderResultTimeout from "./resultTimeout";
-import renderHeaderTemplate from "./header";
 
 export default class PerformerView extends AbstractView {
   constructor(level) {
@@ -19,7 +12,7 @@ export default class PerformerView extends AbstractView {
       <h2 class="title main-title">Кто исполняет эту песню?</h2>
       <div class="player-wrapper">
         <div class="player">
-          <audio src="${this.level.audio}" autoplay></audio>
+          <audio src="${this.level.audio}" <!--autoplay-->></audio>
           <button class="player-control player-control--pause"></button>
           <div class="player-track">
             <span class="player-status"></span>
@@ -51,8 +44,8 @@ export default class PerformerView extends AbstractView {
     [...answerElements].forEach((answer) => {
       answer.addEventListener(`click`, (evt) => {
         this.onSwitch(evt);
-      }
-    }
+      });
+    });
   }
 
   onSwitch(evt) {

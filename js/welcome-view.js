@@ -1,8 +1,4 @@
 import AbstractView from "./abstract-view";
-// import headerElement from "./header";
-// import {clearAndSwitchScreen, switchScreen} from "./util";
-// import {currentState, levels} from "./game-data";
-// import performerElement from "./performerTemplate";
 
 export default class WelcomeView extends AbstractView {
   constructor() {

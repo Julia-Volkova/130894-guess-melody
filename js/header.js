@@ -1,5 +1,5 @@
 import {render, switchScreen} from "./util";
-import welcomeScreenElement from "./welcomeScreen";
+import WelcomeView from "./welcome-view";
 import {backToInitialState} from "./util";
 
 export default function renderHeaderTemplate(state) {
@@ -27,9 +27,10 @@ export default function renderHeaderTemplate(state) {
   const headerElement = render(headerTemplate);
 
   const btnPlayAgain = headerElement.querySelector(`.play-again__wrap`);
+  const welcomeView = new WelcomeView();
 
   btnPlayAgain.addEventListener(`click`, () => {
-    switchScreen(welcomeScreenElement());
+    switchScreen(welcomeView.element);
     backToInitialState();
   });
 
