@@ -1,4 +1,4 @@
-import AbstractView from "./abstract-view";
+import AbstractView from "./abstractView";
 import controlPlayer from "./controlPlayer";
 
 export default class GenreView extends AbstractView {

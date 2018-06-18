@@ -1,6 +1,6 @@
-import AbstractView from "./abstract-view";
+import AbstractView from "./abstractView";
 
-export default class ResultWin extends AbstractView {
+export default class ResultWinView extends AbstractView {
   constructor(result) {
     super();
     this.result = result;

@@ -1,6 +1,6 @@
-import {currentState, calcScores, results, showResultScreen} from "./game-data";
+import {currentState, calcScores, results, showResultScreen} from "./gameData";
 
-export const calculateFinalResults = function () {
+export default () => {
   currentState.points = calcScores(results, currentState.lives);
 
   let calcFastAnswers = (arr) => {

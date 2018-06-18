@@ -1,4 +1,4 @@
-import {currentState} from "./game-data";
+import {currentState} from "./gameData";
 
 const main = document.querySelector(`.main`);
 

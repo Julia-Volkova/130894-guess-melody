@@ -1,6 +1,6 @@
-import {render, switchScreen} from "./util";
-import WelcomeView from "./welcome-view";
-import {backToInitialState} from "./util";
+import {render, backToInitialState} from "./util";
+import {currentState} from "./gameData";
+import drawWelcomeScreen from "./drawWelcomeScreen";
 
 export default function renderHeaderTemplate(state) {
   const headerTemplate =
@@ -27,10 +27,9 @@ export default function renderHeaderTemplate(state) {
   const headerElement = render(headerTemplate);
 
   const btnPlayAgain = headerElement.querySelector(`.play-again__wrap`);
-  const welcomeView = new WelcomeView();
 
   btnPlayAgain.addEventListener(`click`, () => {
-    switchScreen(welcomeView.element);
+    drawWelcomeScreen(currentState);
     backToInitialState();
   });
 

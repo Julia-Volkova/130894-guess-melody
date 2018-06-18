@@ -1,3 +1,7 @@
-import screen from "./screen";
+import drawWelcomeScreen from "./drawWelcomeScreen";
+import {currentState} from "./gameData";
+import calculateFinalResults from "./computeFinalResult";
 
-screen();
+drawWelcomeScreen(currentState);
+
+calculateFinalResults();
