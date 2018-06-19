@@ -1,7 +1,3 @@
-import {render, backToInitialState} from "./util";
-import {currentState} from "./gameData";
-import drawWelcomeScreen from "./drawWelcomeScreen";
-
 export default function renderHeaderTemplate(state) {
   const headerTemplate =
     `<a class="play-again play-again__wrap" href="#">
@@ -23,15 +19,6 @@ export default function renderHeaderTemplate(state) {
     ${new Array(3 - state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``)}
     </div>
 `;
-
-  // const headerElement = render(headerTemplate);
-  //
-  // const btnPlayAgain = headerElement.querySelector(`.play-again__wrap`);
-  //
-  // btnPlayAgain.addEventListener(`click`, () => {
-  //   drawWelcomeScreen(currentState);
-  //   backToInitialState();
-  // });
 
   return headerTemplate;
 }

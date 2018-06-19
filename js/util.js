@@ -1,4 +1,4 @@
-import {currentState} from "./gameData";
+import {currentState, results} from "./gameData";
 
 const main = document.querySelector(`.main`);
 
@@ -18,5 +18,6 @@ export const backToInitialState = () => {
   currentState.lives = 3;
   currentState.time = 300;
   currentState.level = 0;
+  results.splice(0);
 };
 

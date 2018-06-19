@@ -1,5 +1,5 @@
 import GenreView from "./genreView";
-import {currentState, levels, results, statisticLose} from "./gameData";
+import {currentState, levels, statisticLose, results} from "./gameData";
 import {switchScreen, backToInitialState} from "./util";
 import drawResultLoseScreen from "./drawResultLoseScreen";
 import drawResultWinScreen from "./drawResultWinScreen";
@@ -25,6 +25,7 @@ export default function drawGenreScreen(state) {
     };
 
     results.push(currentAnswer);
+
     if (currentAnswer.correct === false) {
       state.lives--;
     }

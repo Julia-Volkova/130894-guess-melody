@@ -16,5 +16,7 @@ export default (obj) => {
   resultWinView.onDrawWelcome = () => {
     drawWelcomeScreen(currentState);
     backToInitialState();
+    currentState.points = 0;
+    currentState.fastAnswers = 0;
   };
 };

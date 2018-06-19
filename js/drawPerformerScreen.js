@@ -1,5 +1,5 @@
 import PerformerView from "./performerView";
-import {currentState, levels, results, statisticLose} from "./gameData";
+import {currentState, levels, statisticLose, results} from "./gameData";
 import {switchScreen, backToInitialState} from "./util";
 import drawGenreScreen from "./drawGenreScreen";
 import drawResultLoseScreen from "./drawResultLoseScreen";
@@ -19,6 +19,7 @@ export default function drawPerformerScreen(state) {
     };
 
     results.push(currentAnswer);
+
     if (isCorrect === false) {
       state.lives--;
     }
