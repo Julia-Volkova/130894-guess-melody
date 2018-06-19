@@ -10,14 +10,14 @@ export default function drawPerformerScreen(state) {
 
   switchScreen(performerView.element, renderHeaderTemplate(state));
 
-  performerView.onSwitch = (evt) => {
+  performerView.onSwitch = (isCorrect) => {
     state.level++;
-    let currentCorrect = evt.currentTarget.getAttribute(`data-correct`);
-    let isCorrect = (currentCorrect === `true`);
+
     let currentAnswer = {
       correct: isCorrect,
       time: 30
     };
+
     results.push(currentAnswer);
     if (isCorrect === false) {
       state.lives--;

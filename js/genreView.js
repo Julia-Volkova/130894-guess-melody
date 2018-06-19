@@ -13,7 +13,7 @@ export default class GenreView extends AbstractView {
       <form class="genre">
       
       ${this.level.answers.map((answer, i) =>
-    `<div class="genre-answer">
+      `<div class="genre-answer">
           <div class="player-wrapper">
             <div class="player">
               <audio src="${answer.audio}" ${answer.autoplay ? `autoplay` : ``}></audio>
@@ -26,7 +26,7 @@ export default class GenreView extends AbstractView {
           <input type="checkbox" name="answer" value="answer-${i + 1}" id="a-${i + 1}" data-correct="${answer.correct}">
           <label class="genre-answer-check" for="a-${i + 1}"></label>
         </div>`
-  ).join(``)}
+    ).join(``)}
         <button class="genre-answer-send" type="submit">Ответить</button>
       </form>
     </div>`;
@@ -68,8 +68,20 @@ export default class GenreView extends AbstractView {
       });
     });
 
+    let answers = [];
+    let result = ``;
+    [...playerChecks].forEach((elem) => {
+      elem.addEventListener(`click`, () => {
+        let correct = elem.getAttribute(`data-correct`);
+        let isCorrect = (correct === `true`);
+        if (elem.checked) {
+          answers.push(isCorrect);
+        }
+      });
+    });
+
     btnAnswered.addEventListener(`click`, (evt) => {
-      this.onSwitch(evt);
+      this.onSwitch(evt, result, answers);
     });
   }
 

@@ -42,8 +42,10 @@ export default class PerformerView extends AbstractView {
     controlPlayer(playerControl, audio);
 
     [...answerElements].forEach((answer) => {
-      answer.addEventListener(`click`, (evt) => {
-        this.onSwitch(evt);
+      answer.addEventListener(`click`, () => {
+        let currentCorrect = answer.getAttribute(`data-correct`);
+        let isCorrect = (currentCorrect === `true`);
+        this.onSwitch(isCorrect);
       });
     });
   }

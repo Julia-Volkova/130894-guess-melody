@@ -11,31 +11,19 @@ export default function drawGenreScreen(state) {
 
   switchScreen(genreView.element, renderHeaderTemplate(state));
 
-  genreView.onSwitch = (evt) => {
+  genreView.onSwitch = (evt, result, answers) => {
     evt.preventDefault();
     state.level++;
 
-    let currentCorrect = () => {
-      const playerChecks = genreView.element.querySelectorAll(`.genre-answer input`);
-      let answers = [];
-      let result = ``;
-      [...playerChecks].forEach((elem) => {
-        let correct = elem.getAttribute(`data-correct`);
-        let isCorrect = (correct === `true`);
-        if (elem.checked === true) {
-          answers.push(isCorrect);
-        }
-      });
-      result = answers.every((el) => {
-        return el === true;
-      });
-      return result;
-    };
+    result = answers.every((el) => {
+      return el === true;
+    });
 
     let currentAnswer = {
-      correct: currentCorrect(),
+      correct: result,
       time: 30
     };
+
     results.push(currentAnswer);
     if (currentAnswer.correct === false) {
       state.lives--;
