@@ -1,5 +1,7 @@
 import AbstractView from "./abstractView";
 import controlPlayer from "./controlPlayer";
+import renderHeaderTemplate from "./header";
+import {currentState} from "./gameData";
 
 export default class GenreView extends AbstractView {
   constructor(level) {
@@ -8,12 +10,12 @@ export default class GenreView extends AbstractView {
   }
 
   get template() {
-    return `<div class="main-wrap">
+    return renderHeaderTemplate(currentState) + `<div class="main-wrap">
       <h2 class="title">Выберите ${this.level.genre} треки</h2>
       <form class="genre">
       
       ${this.level.answers.map((answer, i) =>
-      `<div class="genre-answer">
+    `<div class="genre-answer">
           <div class="player-wrapper">
             <div class="player">
               <audio src="${answer.audio}" ${answer.autoplay ? `autoplay` : ``}></audio>
@@ -26,7 +28,7 @@ export default class GenreView extends AbstractView {
           <input type="checkbox" name="answer" value="answer-${i + 1}" id="a-${i + 1}" data-correct="${answer.correct}">
           <label class="genre-answer-check" for="a-${i + 1}"></label>
         </div>`
-    ).join(``)}
+  ).join(``)}
         <button class="genre-answer-send" type="submit">Ответить</button>
       </form>
     </div>`;
@@ -36,6 +38,7 @@ export default class GenreView extends AbstractView {
     const playerChecks = this.element.querySelectorAll(`.genre-answer input`);
     const btnAnswered = this.element.querySelector(`.genre-answer-send`);
     const playerControls = this.element.querySelectorAll(`.player-control`);
+    const btnPlayAgain = this.element.querySelector(`.play-again__wrap`);
     let checkState = [];
     let checkOne;
 
@@ -83,9 +86,17 @@ export default class GenreView extends AbstractView {
     btnAnswered.addEventListener(`click`, (evt) => {
       this.onSwitch(evt, result, answers);
     });
+
+    btnPlayAgain.addEventListener(`click`, () => {
+      this.onDrawWelcome();
+    });
   }
 
   onSwitch() {
+
+  }
+
+  onDrawWelcome() {
 
   }
 }

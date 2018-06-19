@@ -24,14 +24,14 @@ export default function renderHeaderTemplate(state) {
     </div>
 `;
 
-  const headerElement = render(headerTemplate);
+  // const headerElement = render(headerTemplate);
+  //
+  // const btnPlayAgain = headerElement.querySelector(`.play-again__wrap`);
+  //
+  // btnPlayAgain.addEventListener(`click`, () => {
+  //   drawWelcomeScreen(currentState);
+  //   backToInitialState();
+  // });
 
-  const btnPlayAgain = headerElement.querySelector(`.play-again__wrap`);
-
-  btnPlayAgain.addEventListener(`click`, () => {
-    drawWelcomeScreen(currentState);
-    backToInitialState();
-  });
-
-  return headerElement;
+  return headerTemplate;
 }

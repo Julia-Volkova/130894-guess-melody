@@ -8,9 +8,8 @@ export const render = (str) => {
   return template.content;
 };
 
-export const switchScreen = (element, header = document.createDocumentFragment()) => {
+export const switchScreen = (element) => {
   main.innerHTML = ``;
-  main.appendChild(header);
   main.appendChild(element);
 };
 

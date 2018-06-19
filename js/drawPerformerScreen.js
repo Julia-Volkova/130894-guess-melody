@@ -1,14 +1,14 @@
 import PerformerView from "./performerView";
-import {levels, results, statisticLose} from "./gameData";
-import {switchScreen} from "./util";
-import renderHeaderTemplate from "./header";
+import {currentState, levels, results, statisticLose} from "./gameData";
+import {switchScreen, backToInitialState} from "./util";
 import drawGenreScreen from "./drawGenreScreen";
 import drawResultLoseScreen from "./drawResultLoseScreen";
+import drawWelcomeScreen from "./drawWelcomeScreen";
 
 export default function drawPerformerScreen(state) {
   const performerView = new PerformerView(levels[state.level]);
 
-  switchScreen(performerView.element, renderHeaderTemplate(state));
+  switchScreen(performerView.element);
 
   performerView.onSwitch = (isCorrect) => {
     state.level++;
@@ -32,5 +32,10 @@ export default function drawPerformerScreen(state) {
     } else {
       drawPerformerScreen(state);
     }
+  };
+
+  performerView.onDrawWelcome = () => {
+    drawWelcomeScreen(currentState);
+    backToInitialState();
   };
 }

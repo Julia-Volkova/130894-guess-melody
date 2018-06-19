@@ -1,5 +1,7 @@
 import AbstractView from "./abstractView";
 import controlPlayer from "./controlPlayer";
+import renderHeaderTemplate from "./header";
+import {currentState} from "./gameData";
 
 export default class PerformerView extends AbstractView {
   constructor(level) {
@@ -8,7 +10,7 @@ export default class PerformerView extends AbstractView {
   }
 
   get template() {
-    return `<div class="main-wrap">
+    return renderHeaderTemplate(currentState) + `<div class="main-wrap">
       <h2 class="title main-title">Кто исполняет эту песню?</h2>
       <div class="player-wrapper">
         <div class="player">
@@ -38,6 +40,7 @@ export default class PerformerView extends AbstractView {
     const answerElements = this.element.querySelectorAll(`.main-answer-wrapper`);
     const audio = this.element.querySelector(`.player audio`);
     const playerControl = this.element.querySelector(`.player-control`);
+    const btnPlayAgain = this.element.querySelector(`.play-again__wrap`);
 
     controlPlayer(playerControl, audio);
 
@@ -48,9 +51,17 @@ export default class PerformerView extends AbstractView {
         this.onSwitch(isCorrect);
       });
     });
+
+    btnPlayAgain.addEventListener(`click`, () => {
+      this.onDrawWelcome();
+    });
   }
 
   onSwitch() {
+
+  }
+
+  onDrawWelcome() {
 
   }
 }

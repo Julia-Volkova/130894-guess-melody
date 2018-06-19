@@ -1,15 +1,15 @@
 import GenreView from "./genreView";
-import {levels, results, statisticLose} from "./gameData";
-import {switchScreen} from "./util";
-import renderHeaderTemplate from "./header";
+import {currentState, levels, results, statisticLose} from "./gameData";
+import {switchScreen, backToInitialState} from "./util";
 import drawResultLoseScreen from "./drawResultLoseScreen";
 import drawResultWinScreen from "./drawResultWinScreen";
 import calculateFinalResults from "./computeFinalResult";
+import drawWelcomeScreen from "./drawWelcomeScreen";
 
 export default function drawGenreScreen(state) {
   const genreView = new GenreView(levels[state.level]);
 
-  switchScreen(genreView.element, renderHeaderTemplate(state));
+  switchScreen(genreView.element);
 
   genreView.onSwitch = (evt, result, answers) => {
     evt.preventDefault();
@@ -38,5 +38,10 @@ export default function drawGenreScreen(state) {
     } else {
       drawGenreScreen(state);
     }
+  };
+
+  genreView.onDrawWelcome = () => {
+    drawWelcomeScreen(currentState);
+    backToInitialState();
   };
 }
