@@ -335,4 +335,37 @@ const timeCount = (startTime) => {
   return time;
 };
 
-export {levels, currentState, results, statisticLose, calcScores, showResultScreen, timeCount};
+let timer;
+const ONE_SECOND = 1000;
+
+const startTimer = () => {
+  creationTimeFormat(currentState);
+  timer = setTimeout(() => {
+    currentState.time = timeCount(currentState.time).tick();
+    creationTimeFormat(currentState);
+    startTimer();
+  }, ONE_SECOND);
+};
+
+const stopTimer = () => {
+  clearTimeout(timer);
+};
+
+const creationTimeFormat = (state) => {
+  let minutes = Math.floor(state.time / 60);
+  let seconds = state.time - (minutes * 60);
+  if (minutes.toString().length < 2) {
+    minutes = `0` + minutes;
+  }
+  if (seconds.toString().length < 2) {
+    seconds = `0` + seconds;
+  }
+
+  state.timeFormat = {
+    min: minutes,
+    sec: seconds
+  };
+  return state.timeFormat;
+};
+
+export {levels, currentState, results, statisticLose, calcScores, showResultScreen, timeCount, startTimer, stopTimer};

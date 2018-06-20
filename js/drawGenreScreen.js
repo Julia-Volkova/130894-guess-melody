@@ -1,5 +1,5 @@
 import GenreView from "./genreView";
-import {currentState, levels, statisticLose, results} from "./gameData";
+import {currentState, levels, statisticLose, results, startTimer, stopTimer} from "./gameData";
 import {switchScreen, backToInitialState} from "./util";
 import drawResultLoseScreen from "./drawResultLoseScreen";
 import drawResultWinScreen from "./drawResultWinScreen";
@@ -14,6 +14,7 @@ export default function drawGenreScreen(state) {
   genreView.onSwitch = (evt, result, answers) => {
     evt.preventDefault();
     state.level++;
+    stopTimer();
 
     result = answers.every((el) => {
       return el === true;
@@ -38,11 +39,13 @@ export default function drawGenreScreen(state) {
       drawResultWinScreen(calculateFinalResults());
     } else {
       drawGenreScreen(state);
+      startTimer();
     }
   };
 
   genreView.onDrawWelcome = () => {
     drawWelcomeScreen(currentState);
     backToInitialState();
+    stopTimer();
   };
 }

@@ -1,5 +1,5 @@
 import PerformerView from "./performerView";
-import {currentState, levels, statisticLose, results} from "./gameData";
+import {currentState, levels, statisticLose, results, startTimer, stopTimer} from "./gameData";
 import {switchScreen, backToInitialState} from "./util";
 import drawGenreScreen from "./drawGenreScreen";
 import drawResultLoseScreen from "./drawResultLoseScreen";
@@ -12,6 +12,7 @@ export default function drawPerformerScreen(state) {
 
   performerView.onSwitch = (isCorrect) => {
     state.level++;
+    stopTimer();
 
     let currentAnswer = {
       correct: isCorrect,
@@ -30,13 +31,16 @@ export default function drawPerformerScreen(state) {
       drawResultLoseScreen(statisticLose.timeEnds);
     } else if (levels[state.level].type === `genre`) {
       drawGenreScreen(state);
+      startTimer();
     } else {
       drawPerformerScreen(state);
+      startTimer();
     }
   };
 
   performerView.onDrawWelcome = () => {
     drawWelcomeScreen(currentState);
     backToInitialState();
+    stopTimer();
   };
 }
