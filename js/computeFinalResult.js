@@ -1,4 +1,4 @@
-import {currentState, calcScores, results, showResultScreen} from "./gameData";
+import {calcScores, results, showResultScreen, currentState} from "./gameData";
 
 export default () => {
   currentState.points = calcScores(results, currentState.lives);

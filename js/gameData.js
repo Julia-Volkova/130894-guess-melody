@@ -265,12 +265,12 @@ const levels = {
 
 const statisticLose = {
   livesEnd: {
-    'title': `Какая жалость!`,
-    'description': `У вас закончились все попытки.<br>Ничего, повезёт в следующий раз!`
+    title: `Какая жалость!`,
+    description: `У вас закончились все попытки.<br>Ничего, повезёт в следующий раз!`
   },
   timeEnds: {
-    'title': `Увы и ах!`,
-    'description': `Время вышло!<br>Вы не успели отгадать все мелодии`
+    title: `Увы и ах!`,
+    description: `Время вышло!<br>Вы не успели отгадать все мелодии`
   }
 };
 
@@ -365,7 +365,6 @@ const creationTimeFormat = (state) => {
     min: minutes,
     sec: seconds
   };
-  return state.timeFormat;
 };
 
 export {levels, currentState, results, statisticLose, calcScores, showResultScreen, timeCount, startTimer, stopTimer};
