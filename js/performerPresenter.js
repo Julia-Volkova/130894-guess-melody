@@ -1,17 +1,16 @@
 import PerformerView from "./performerView";
-import {currentState, levels, statisticLose, results} from "./gameData";
+import {levels, results} from "./gameData";
 import {switchScreen, backToInitialState} from "./util";
-import WelcomePresenter from "./welcomePresenter";
-import GameModel from "./gameModel";
-import GenrePresenter from "./genrePresenter";
-import ResultLosePresenter from "./resultLosePresenter";
+import Router from "./router";
+
+let timerValue;
 
 export default class PerformerPresenter {
   constructor(model) {
     this.model = model;
     this.content = new PerformerView(levels[this.model.state.level]);
     this.root = switchScreen(this.content.element);
-    this.activateTimer = this.model.tick;
+    this.timerValue = timerValue;
   }
 
   get element() {
@@ -20,15 +19,15 @@ export default class PerformerPresenter {
 
   answer() {
     if (this.model.state.lives === 0) {
-      new ResultLosePresenter(new GameModel(currentState), statisticLose.livesEnd).init();
+      Router.showResultLoseLivesEndScreen();
     } else if (this.model.state.time === 0) {
-      new ResultLosePresenter(new GameModel(currentState), statisticLose.timeEnds).init();
+      Router.showResultLoseTimesEndScreen();
     } else if (levels[this.model.state.level].type === `genre`) {
-      new GenrePresenter(new GameModel(currentState)).init();
-      this.activateTimer();
+      Router.showGenreScreen();
+      this.model.tick();
     } else {
-      new PerformerPresenter(new GameModel(currentState)).init();
-      this.activateTimer();
+      Router.showPerformerScreen();
+      this.model.tick();
     }
   }
 
@@ -36,6 +35,8 @@ export default class PerformerPresenter {
     this.content.onSwitch = (isCorrect) => {
       this.model.nextLevel();
       this.model.stopTimer();
+      this.stopTimerValue();
+
       let currentAnswer = {
         correct: isCorrect,
         time: 30
@@ -50,18 +51,26 @@ export default class PerformerPresenter {
     };
 
     this.content.onDrawWelcome = () => {
-      new WelcomePresenter(new GameModel(currentState)).init();
+      Router.showWelcomeScreen();
       backToInitialState();
       this.model.stopTimer();
+      this.stopTimerValue();
     };
   }
 
   setTimerValue() {
     this.content.timerMin.innerHTML = this.model.state.timeFormat.min;
     this.content.timerSec.innerHTML = this.model.state.timeFormat.sec;
-    setTimeout(() => {
+    this.timerValue = setTimeout(() => {
       this.setTimerValue();
     }, 1000);
+    if (this.model.state.time === 0) {
+      this.stopTimerValue();
+    }
+  }
+
+  stopTimerValue() {
+    clearTimeout(this.timerValue);
   }
 
   init() {

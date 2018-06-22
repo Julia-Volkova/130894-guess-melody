@@ -47,16 +47,19 @@ export default class GameModel {
   }
 
   tick() {
-    console.log('lsdf'); 
     this.creationTimeFormat();
     this.state.time = timeCount(this.state.time).tick();
     timer = setTimeout(() => {
       this.tick();
     }, ONE_SECOND);
+    if (this.state.time === 0) {
+      this.stopTimer();
+    }
   }
 
   stopTimer() {
     clearTimeout(timer);
+    this.state;
   }
 
   creationTimeFormat() {

@@ -1,8 +1,6 @@
 import ResultWinView from "./resultWinView";
 import {switchScreen, backToInitialState} from "./util";
-import {currentState} from "./gameData";
-import WelcomePresenter from "./welcomePresenter";
-import GameModel from "./gameModel";
+import Router from "./router";
 
 export default class ResultWinPresenter {
   constructor(model, obj) {
@@ -18,13 +16,13 @@ export default class ResultWinPresenter {
 
   showResult() {
     this.content.onSwitch = () => {
-      new WelcomePresenter(new GameModel(currentState)).init();
+      Router.showWelcomeScreen();
       backToInitialState();
       this.model.initialState();
     };
 
     this.content.onDrawWelcome = () => {
-      new WelcomePresenter(new GameModel(currentState)).init();
+      Router.showWelcomeScreen();
       backToInitialState();
       this.model.initialState();
     };

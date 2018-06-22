@@ -1,7 +1,3 @@
-import WelcomePresenter from "./welcomePresenter";
-import {currentState} from "./gameData";
-import GameModel from "./gameModel";
+import Router from "./router";
 
-
-const welcomePresenter = new WelcomePresenter(new GameModel(currentState));
-welcomePresenter.init();
+Router.showWelcomeScreen();
