@@ -6,6 +6,7 @@ const ONE_SECOND = 1000;
 export default class GameModel {
   constructor(state) {
     this._state = state;
+    this.tick = this.tick.bind(this);
   }
 
   get state() {
@@ -46,10 +47,10 @@ export default class GameModel {
   }
 
   tick() {
+    console.log('lsdf'); 
     this.creationTimeFormat();
+    this.state.time = timeCount(this.state.time).tick();
     timer = setTimeout(() => {
-      this.state.time = timeCount(this.state.time).tick();
-      this.creationTimeFormat();
       this.tick();
     }, ONE_SECOND);
   }

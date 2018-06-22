@@ -9,27 +9,24 @@ export default class WelcomePresenter {
     this.model = model;
     this.content = new WelcomeView();
     this.root = switchScreen(this.content.element);
+    this.activateTimer = this.model.tick;
   }
 
   get element() {
     return this.root;
   }
 
-  activateTimer() {
-    this.model.tick();
-  }
-
-  changeLevel() {
+  startGame() {
     this.content.onSwitch = () => {
       this.model.nextLevel();
       this.model.creationTimeFormat();
-      new PerformerPresenter(new GameModel(currentState)).init();
       this.activateTimer();
+      new PerformerPresenter(new GameModel(currentState)).init();
     };
   }
 
   init() {
-    this.changeLevel();
+    this.startGame();
   }
 }
 

@@ -55,6 +55,10 @@ export default class PerformerView extends AbstractView {
     btnPlayAgain.addEventListener(`click`, () => {
       this.onDrawWelcome();
     });
+
+    this.timerMin = this.element.querySelector(`.timer-value-mins`);
+    this.timerSec = this.element.querySelector(`.timer-value-secs`);
+
   }
 
   onSwitch() {

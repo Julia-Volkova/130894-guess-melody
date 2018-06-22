@@ -12,14 +12,11 @@ export default class GenrePresenter {
     this.model = model;
     this.content = new GenreView(levels[this.model.state.level]);
     this.root = switchScreen(this.content.element);
+    this.activateTimer = this.model.tick;
   }
 
   get element() {
     return this.root;
-  }
-
-  activateTimer() {
-    this.model.tick();
   }
 
   answer() {
@@ -66,7 +63,16 @@ export default class GenrePresenter {
     };
   }
 
+  setTimerValue() {
+    this.content.timerMin.innerHTML = this.model.state.timeFormat.min;
+    this.content.timerSec.innerHTML = this.model.state.timeFormat.sec;
+    setTimeout(() => {
+      this.setTimerValue();
+    }, 1000);
+  }
+
   init() {
     this.changeLevel();
+    this.setTimerValue();
   }
 }
