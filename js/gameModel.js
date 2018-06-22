@@ -59,7 +59,7 @@ export default class GameModel {
 
   stopTimer() {
     clearTimeout(timer);
-    this.state;
+    this.creationTimeFormat();
   }
 
   creationTimeFormat() {
