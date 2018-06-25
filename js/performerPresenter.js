@@ -4,14 +4,15 @@ import {switchScreen} from "./util";
 import {Router, router} from "./router";
 import GameModel from "./gameModel";
 
-let timerValue;
+let timer;
 
 export default class PerformerPresenter {
   constructor(model) {
     this.model = model;
     this.content = new PerformerView(this.model, levels[this.model.state.level]);
     this.root = switchScreen(this.content.element);
-    this.timerValue = timerValue;
+    this.timer = timer;
+    this.isTimerInit = false;
   }
 
   get element() {
@@ -35,8 +36,8 @@ export default class PerformerPresenter {
   changeLevel() {
     this.content.onSwitch = (isCorrect) => {
       this.model.nextLevel();
-      this.model.stopTimer();
-      this.stopTimerValue();
+      this.stopTimer();
+      this.isTimerInit = true;
 
       let currentAnswer = {
         correct: isCorrect,
@@ -54,28 +55,39 @@ export default class PerformerPresenter {
     this.content.onDrawWelcome = () => {
       router.model = new GameModel();
       Router.showWelcomeScreen();
-      this.model.stopTimer();
-      this.stopTimerValue();
     };
   }
 
-  setTimerValue() {
+  changeTimer() {
+    this.model.tick();
+    this.updateTimer();
+    if (this.model.state.time === 30) {
+      this.content.timerContainer.classList.add(`timer-value--finished`);
+    }
+    this.timer = setTimeout(() => {
+      if (this.model.timer.isTimeout) {
+        Router.showResultLoseTimesEndScreen();
+        this.stopTimer();
+      }
+      this.changeTimer();
+    }, 1000);
+  }
+
+  updateTimer() {
     this.content.timerMin.innerHTML = this.model.state.timeFormat.min;
     this.content.timerSec.innerHTML = this.model.state.timeFormat.sec;
-    this.timerValue = setTimeout(() => {
-      this.setTimerValue();
-    }, 1000);
-    if (this.model.state.time === 0) {
-      this.stopTimerValue();
-    }
   }
 
-  stopTimerValue() {
-    clearTimeout(this.timerValue);
+  stopTimer() {
+    clearInterval(this.timer);
   }
+
 
   init() {
-    this.setTimerValue();
     this.changeLevel();
+
+    if (this.isTimerInit === false) {
+      this.changeTimer();
+    }
   }
 }

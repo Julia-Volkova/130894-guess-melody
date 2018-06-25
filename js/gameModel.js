@@ -1,7 +1,7 @@
 import {timeCount, calcScores, showResultScreen, results} from "./gameData";
 
-let timer;
-const ONE_SECOND = 1000;
+// let timer;
+// const ONE_SECOND = 1000;
 
 export default class GameModel {
   constructor() {
@@ -14,6 +14,7 @@ export default class GameModel {
       statistics: ``,
       timeFormat: ``
     };
+    this.timer = timeCount(this.state.time);
     this.tick = this.tick.bind(this);
   }
 
@@ -47,23 +48,29 @@ export default class GameModel {
 
   tick() {
     this.creationTimeFormat();
-    this.state.time = timeCount(this.state.time).tick();
-    timer = setTimeout(() => {
-      this.tick();
-    }, ONE_SECOND);
-    if (this.state.time === 0) {
-      this.stopTimer();
-    }
+    this.timer.tick();
+    this.state.time = this.timer.remainingTime;
   }
 
-  stopTimer() {
-    clearTimeout(timer);
-    this.creationTimeFormat();
-  }
+  // tick() {
+  //   this.creationTimeFormat();
+  //   this.state.time = timeCount(this.state.time).tick();
+  //   timer = setTimeout(() => {
+  //     this.tick();
+  //   }, ONE_SECOND);
+  //   if (this.state.time === 0) {
+  //     this.stopTimer();
+  //   }
+  // }
+
+  // stopTimer() {
+  //   clearTimeout(timer);
+  //   this.creationTimeFormat();
+  // }
 
   creationTimeFormat() {
-    let minutes = Math.floor(this.state.time / 60);
-    let seconds = this.state.time - (minutes * 60);
+    let minutes = Math.floor(this.timer.remainingTime / 60);
+    let seconds = this.timer.remainingTime - (minutes * 60);
     if (minutes.toString().length < 2) {
       minutes = `0` + minutes;
     }

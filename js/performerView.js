@@ -56,8 +56,9 @@ export default class PerformerView extends AbstractView {
       this.onDrawWelcome();
     });
 
-    this.timerMin = this.element.querySelector(`.timer-value-mins`);
-    this.timerSec = this.element.querySelector(`.timer-value-secs`);
+    this.timerContainer = this.element.querySelector(`.timer-value`);
+    this.timerMin = this.timerContainer.querySelector(`.timer-value-mins`);
+    this.timerSec = this.timerContainer.querySelector(`.timer-value-secs`);
   }
 
   onSwitch() {

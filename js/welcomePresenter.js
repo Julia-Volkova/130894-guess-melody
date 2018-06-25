@@ -7,7 +7,7 @@ export default class WelcomePresenter {
     this.model = model;
     this.content = new WelcomeView();
     this.root = switchScreen(this.content.element);
-    this.activateTimer = this.model.tick;
+    // this.activateTimer = this.model.tick;
   }
 
   get element() {
@@ -18,7 +18,7 @@ export default class WelcomePresenter {
     this.content.onSwitch = () => {
       this.model.nextLevel();
       this.model.creationTimeFormat();
-      this.activateTimer();
+      // this.activateTimer();
       Router.showPerformerScreen();
     };
   }
