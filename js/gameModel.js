@@ -4,13 +4,17 @@ let timer;
 const ONE_SECOND = 1000;
 
 export default class GameModel {
-  constructor(state) {
-    this._state = state;
+  constructor() {
+    this.state = {
+      points: 0,
+      lives: 3,
+      time: 300,
+      level: 0,
+      fastAnswers: 0,
+      statistics: ``,
+      timeFormat: ``
+    };
     this.tick = this.tick.bind(this);
-  }
-
-  get state() {
-    return this._state;
   }
 
   computeFinalResult() {
@@ -39,11 +43,6 @@ export default class GameModel {
 
   loseLive() {
     return this.state.lives--;
-  }
-
-  initialState() {
-    this.state.points = 0;
-    this.state.fastAnswers = 0;
   }
 
   tick() {

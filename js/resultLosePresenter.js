@@ -1,12 +1,13 @@
 import ResultLoseView from "./resultLoseView";
-import {backToInitialState, switchScreen} from "./util";
-import Router from "./router";
+import {switchScreen} from "./util";
+import {Router, router} from "./router";
+import GameModel from "./gameModel";
 
 export default class ResultLosePresenter {
   constructor(model, type) {
     this.model = model;
     this.type = type;
-    this.content = new ResultLoseView(this.type);
+    this.content = new ResultLoseView(this.model, this.type);
     this.root = switchScreen(this.content.element);
   }
 
@@ -16,13 +17,13 @@ export default class ResultLosePresenter {
 
   showResults() {
     this.content.onSwitch = () => {
+      router.model = new GameModel();
       Router.showWelcomeScreen();
-      backToInitialState();
     };
 
     this.content.onDrawWelcome = () => {
+      router.model = new GameModel();
       Router.showWelcomeScreen();
-      backToInitialState();
     };
   }
 

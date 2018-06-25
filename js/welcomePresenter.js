@@ -1,8 +1,6 @@
 import {switchScreen} from "./util";
-import {currentState} from "./gameData";
 import WelcomeView from "./welcomeView";
-import PerformerPresenter from "./performerPresenter";
-import GameModel from "./gameModel";
+import {Router} from "./router";
 
 export default class WelcomePresenter {
   constructor(model) {
@@ -21,7 +19,7 @@ export default class WelcomePresenter {
       this.model.nextLevel();
       this.model.creationTimeFormat();
       this.activateTimer();
-      new PerformerPresenter(new GameModel(currentState)).init();
+      Router.showPerformerScreen();
     };
   }
 

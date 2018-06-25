@@ -1,9 +1,9 @@
-let currentState = {
-  points: 0,
-  lives: 3,
-  time: 300,
-  level: 0
-};
+// let currentState = {
+//   points: 0,
+//   lives: 3,
+//   time: 300,
+//   level: 0
+// };
 
 const levels = {
   '1': {
@@ -335,36 +335,36 @@ const timeCount = (startTime) => {
   return time;
 };
 
-let timer;
-const ONE_SECOND = 1000;
+// let timer;
+// const ONE_SECOND = 1000;
+//
+// const startTimer = () => {
+//   creationTimeFormat(currentState);
+//   timer = setTimeout(() => {
+//     currentState.time = timeCount(currentState.time).tick();
+//     creationTimeFormat(currentState);
+//     startTimer();
+//   }, ONE_SECOND);
+// };
+//
+// const stopTimer = () => {
+//   clearTimeout(timer);
+// };
 
-const startTimer = () => {
-  creationTimeFormat(currentState);
-  timer = setTimeout(() => {
-    currentState.time = timeCount(currentState.time).tick();
-    creationTimeFormat(currentState);
-    startTimer();
-  }, ONE_SECOND);
-};
+// const creationTimeFormat = (state) => {
+//   let minutes = Math.floor(state.time / 60);
+//   let seconds = state.time - (minutes * 60);
+//   if (minutes.toString().length < 2) {
+//     minutes = `0` + minutes;
+//   }
+//   if (seconds.toString().length < 2) {
+//     seconds = `0` + seconds;
+//   }
+//
+//   state.timeFormat = {
+//     min: minutes,
+//     sec: seconds
+//   };
+// };
 
-const stopTimer = () => {
-  clearTimeout(timer);
-};
-
-const creationTimeFormat = (state) => {
-  let minutes = Math.floor(state.time / 60);
-  let seconds = state.time - (minutes * 60);
-  if (minutes.toString().length < 2) {
-    minutes = `0` + minutes;
-  }
-  if (seconds.toString().length < 2) {
-    seconds = `0` + seconds;
-  }
-
-  state.timeFormat = {
-    min: minutes,
-    sec: seconds
-  };
-};
-
-export {levels, currentState, results, statisticLose, calcScores, showResultScreen, timeCount, startTimer, stopTimer};
+export {levels, results, statisticLose, calcScores, showResultScreen, timeCount};

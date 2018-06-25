@@ -1,5 +1,3 @@
-import {currentState, results} from "./gameData";
-
 const main = document.querySelector(`.main`);
 
 export const render = (str) => {
@@ -13,11 +11,11 @@ export const switchScreen = (element) => {
   main.appendChild(element);
 };
 
-export const backToInitialState = () => {
-  currentState.points = 0;
-  currentState.lives = 3;
-  currentState.time = 300;
-  currentState.level = 0;
-  results.splice(0);
-};
+// export const backToInitialState = () => {
+//   currentState.points = 0;
+//   currentState.lives = 3;
+//   currentState.time = 300;
+//   currentState.level = 0;
+//   results.splice(0);
+// };
 

@@ -1,45 +1,45 @@
-import GameModel from "./gameModel";
 import WelcomePresenter from "./welcomePresenter";
 import PerformerPresenter from "./performerPresenter";
 import GenrePresenter from "./genrePresenter";
 import ResultLosePresenter from "./resultLosePresenter";
 import ResultWinPresenter from "./resultWinPresenter";
-import {currentState, statisticLose} from "./gameData";
+import {statisticLose} from "./gameData";
+import GameModel from "./gameModel";
 
-export default class Router {
+export class Router {
+  constructor() {
+    this.model = new GameModel();
+  }
+
   static showWelcomeScreen() {
-    const model = new GameModel(currentState);
-    const welcomePresenter = new WelcomePresenter(model);
+    const welcomePresenter = new WelcomePresenter(router.model);
     welcomePresenter.init();
   }
 
   static showPerformerScreen() {
-    const model = new GameModel(currentState);
-    const performerPresenter = new PerformerPresenter(model);
+    const performerPresenter = new PerformerPresenter(router.model);
     performerPresenter.init();
   }
 
   static showGenreScreen() {
-    const model = new GameModel(currentState);
-    const genrePresenter = new GenrePresenter(model);
+    const genrePresenter = new GenrePresenter(router.model);
     genrePresenter.init();
   }
 
   static showResultLoseLivesEndScreen() {
-    const model = new GameModel(currentState);
-    const resultLosePresenter = new ResultLosePresenter(model, statisticLose.livesEnd);
+    const resultLosePresenter = new ResultLosePresenter(router.model, statisticLose.livesEnd);
     resultLosePresenter.init();
   }
 
   static showResultLoseTimesEndScreen() {
-    const model = new GameModel(currentState);
-    const resultLosePresenter = new ResultLosePresenter(model, statisticLose.timeEnds);
+    const resultLosePresenter = new ResultLosePresenter(router.model, statisticLose.timeEnds);
     resultLosePresenter.init();
   }
 
   static showResultWinScreen() {
-    const model = new GameModel(currentState);
-    const resultWinPresenter = new ResultWinPresenter(model, model.computeFinalResult());
+    const resultWinPresenter = new ResultWinPresenter(router.model, router.model.computeFinalResult());
     resultWinPresenter.init();
   }
 }
+
+export const router = new Router();

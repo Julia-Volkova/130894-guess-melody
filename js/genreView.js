@@ -1,16 +1,16 @@
 import AbstractView from "./abstractView";
 import controlPlayer from "./controlPlayer";
 import renderHeaderTemplate from "./header";
-import {currentState} from "./gameData";
 
 export default class GenreView extends AbstractView {
-  constructor(level) {
+  constructor(model, level) {
     super();
+    this.model = model;
     this.level = level;
   }
 
   get template() {
-    return renderHeaderTemplate(currentState) + `<div class="main-wrap">
+    return renderHeaderTemplate(this.model.state) + `<div class="main-wrap">
       <h2 class="title">Выберите ${this.level.genre} треки</h2>
       <form class="genre">
       

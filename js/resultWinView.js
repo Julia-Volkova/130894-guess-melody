@@ -1,15 +1,15 @@
 import AbstractView from "./abstractView";
 import renderHeaderTemplate from "./header";
-import {currentState} from "./gameData";
 
 export default class ResultWinView extends AbstractView {
-  constructor(result) {
+  constructor(model, result) {
     super();
+    this.model = model;
     this.result = result;
   }
 
   get template() {
-    return renderHeaderTemplate(currentState) + `<section class="main main--result">
+    return renderHeaderTemplate(this.model.state) + `<section class="main main--result">
     <section class="logo" title="Угадай мелодию"><h1>Угадай мелодию</h1></section>
 
     <h2 class="title">Вы настоящий меломан!</h2>
