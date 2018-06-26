@@ -15,6 +15,10 @@ export default class GameModel {
     this.tick = this.tick.bind(this);
   }
 
+  get currentState() {
+    return this.state;
+  }
+
   computeFinalResult() {
     this.state.points = calcScores(results, this.state.lives);
 

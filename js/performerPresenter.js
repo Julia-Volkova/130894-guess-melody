@@ -36,6 +36,7 @@ export default class PerformerPresenter {
       this.model.nextLevel();
       this.stopTimer();
       this.isTimerInit = true;
+      console.log(this.model.state); 
 
       let currentAnswer = {
         correct: isCorrect,
@@ -51,7 +52,7 @@ export default class PerformerPresenter {
     };
 
     this.content.onDrawWelcome = () => {
-      router.model = new GameModel();
+      // router.model = new GameModel();
       Router.showWelcomeScreen();
     };
   }

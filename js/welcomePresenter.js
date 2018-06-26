@@ -18,6 +18,7 @@ export default class WelcomePresenter {
       this.model.nextLevel();
       this.model.creationTimeFormat();
       Router.showPerformerScreen();
+      console.log(this.model.state);
     };
   }
 

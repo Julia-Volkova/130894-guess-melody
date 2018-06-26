@@ -77,7 +77,7 @@ export default class GenrePresenter {
     };
 
     this.content.onDrawWelcome = () => {
-      router.model = new GameModel();
+      // router.model = new GameModel();
       Router.showWelcomeScreen();
     };
   }

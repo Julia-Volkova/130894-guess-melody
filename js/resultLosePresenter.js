@@ -17,12 +17,12 @@ export default class ResultLosePresenter {
 
   showResults() {
     this.content.onSwitch = () => {
-      router.model = new GameModel();
+      // router.model = new GameModel();
       Router.showWelcomeScreen();
     };
 
     this.content.onDrawWelcome = () => {
-      router.model = new GameModel();
+      // router.model = new GameModel();
       Router.showWelcomeScreen();
     };
   }
