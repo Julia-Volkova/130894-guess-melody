@@ -26,10 +26,8 @@ export default class PerformerPresenter {
       Router.showResultLoseTimesEndScreen();
     } else if (levels[this.model.state.level].type === `genre`) {
       Router.showGenreScreen();
-      this.model.tick();
     } else {
       Router.showPerformerScreen();
-      this.model.tick();
     }
   }
 
@@ -59,23 +57,19 @@ export default class PerformerPresenter {
   }
 
   changeTimer() {
+    if (this.model.timer.isTimeout) {
+      Router.showResultLoseTimesEndScreen();
+      this.stopTimer();
+    }
+    this.model.creationTimeFormat();
+    this.model.updateTimer(this.content.timerMin, this.content.timerSec);
     this.model.tick();
-    this.updateTimer();
-    if (this.model.state.time === 30) {
+    if (this.model.timer.remainingTime <= 30) {
       this.content.timerContainer.classList.add(`timer-value--finished`);
     }
     this.timer = setTimeout(() => {
-      if (this.model.timer.isTimeout) {
-        Router.showResultLoseTimesEndScreen();
-        this.stopTimer();
-      }
       this.changeTimer();
     }, 1000);
-  }
-
-  updateTimer() {
-    this.content.timerMin.innerHTML = this.model.state.timeFormat.min;
-    this.content.timerSec.innerHTML = this.model.state.timeFormat.sec;
   }
 
   stopTimer() {

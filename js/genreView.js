@@ -91,6 +91,7 @@ export default class GenreView extends AbstractView {
       this.onDrawWelcome();
     });
 
+    this.timerContainer = this.element.querySelector(`.timer-value`);
     this.timerMin = this.element.querySelector(`.timer-value-mins`);
     this.timerSec = this.element.querySelector(`.timer-value-secs`);
   }

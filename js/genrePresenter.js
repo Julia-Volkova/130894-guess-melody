@@ -4,14 +4,15 @@ import {switchScreen} from "./util";
 import {Router, router} from "./router";
 import GameModel from "./gameModel";
 
-let timerValue;
+let timer;
 
 export default class GenrePresenter {
   constructor(model) {
     this.model = model;
     this.content = new GenreView(this.model, levels[this.model.state.level]);
     this.root = switchScreen(this.content.element);
-    this.timerValue = timerValue;
+    this.timer = timer;
+    this.isTimerInit = false;
   }
 
   get element() {
@@ -27,16 +28,35 @@ export default class GenrePresenter {
       Router.showResultWinScreen();
     } else {
       Router.showGenreScreen();
-      this.model.tick();
     }
+  }
+
+  changeTimer() {
+    if (this.model.timer.isTimeout) {
+      Router.showResultLoseTimesEndScreen();
+      this.stopTimer();
+    }
+    this.model.creationTimeFormat();
+    this.model.updateTimer(this.content.timerMin, this.content.timerSec);
+    this.model.tick();
+    if (this.model.timer.remainingTime <= 30) {
+      this.content.timerContainer.classList.add(`timer-value--finished`);
+    }
+    this.timer = setTimeout(() => {
+      this.changeTimer();
+    }, 1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.timer);
   }
 
   changeLevel() {
     this.content.onSwitch = (evt, result, answers) => {
       evt.preventDefault();
       this.model.nextLevel();
-      this.model.stopTimer();
-      this.stopTimerValue();
+      this.stopTimer();
+      this.isTimerInit = true;
 
       result = answers.every((el) => {
         return el === true;
@@ -59,28 +79,14 @@ export default class GenrePresenter {
     this.content.onDrawWelcome = () => {
       router.model = new GameModel();
       Router.showWelcomeScreen();
-      this.model.stopTimer();
-      this.stopTimerValue();
     };
-  }
-
-  setTimerValue() {
-    this.content.timerMin.innerHTML = this.model.state.timeFormat.min;
-    this.content.timerSec.innerHTML = this.model.state.timeFormat.sec;
-    this.timerValue = setTimeout(() => {
-      this.setTimerValue();
-    }, 1000);
-    if (this.model.state.time === 0) {
-      this.stopTimerValue();
-    }
-  }
-
-  stopTimerValue() {
-    clearTimeout(this.timerValue);
   }
 
   init() {
     this.changeLevel();
-    this.setTimerValue();
+
+    if (this.isTimerInit === false) {
+      this.changeTimer();
+    }
   }
 }
