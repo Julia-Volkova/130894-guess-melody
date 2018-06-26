@@ -6,11 +6,7 @@ import ResultWinPresenter from "./resultWinPresenter";
 import {statisticLose} from "./gameData";
 import GameModel from "./gameModel";
 
-export class Router {
-  // constructor() {
-  //   this.model = new GameModel();
-  // }
-
+export default class Router {
   static showWelcomeScreen() {
     this.model = new GameModel();
     const welcomePresenter = new WelcomePresenter(this.model);
@@ -42,5 +38,3 @@ export class Router {
     resultWinPresenter.init();
   }
 }
-
-// export const router = new Router();

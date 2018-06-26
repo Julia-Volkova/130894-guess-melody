@@ -3,14 +3,14 @@ import controlPlayer from "./controlPlayer";
 import renderHeaderTemplate from "./header";
 
 export default class GenreView extends AbstractView {
-  constructor(model, level) {
+  constructor(modelState, level) {
     super();
-    this.model = model;
+    this.modelState = modelState;
     this.level = level;
   }
 
   get template() {
-    return renderHeaderTemplate(this.model.state) + `<div class="main-wrap">
+    return renderHeaderTemplate(this.modelState) + `<div class="main-wrap">
       <h2 class="title">Выберите ${this.level.genre} треки</h2>
       <form class="genre">
       

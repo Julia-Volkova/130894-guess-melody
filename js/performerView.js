@@ -3,14 +3,14 @@ import controlPlayer from "./controlPlayer";
 import renderHeaderTemplate from "./header";
 
 export default class PerformerView extends AbstractView {
-  constructor(model, level) {
+  constructor(modelState, level) {
     super();
-    this.model = model;
+    this.modelState = modelState;
     this.level = level;
   }
 
   get template() {
-    return renderHeaderTemplate(this.model.state) + `<div class="main-wrap">
+    return renderHeaderTemplate(this.modelState) + `<div class="main-wrap">
       <h2 class="title main-title">Кто исполняет эту песню?</h2>
       <div class="player-wrapper">
         <div class="player">

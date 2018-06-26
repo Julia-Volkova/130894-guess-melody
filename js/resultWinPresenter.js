@@ -1,13 +1,12 @@
 import ResultWinView from "./resultWinView";
 import {switchScreen} from "./util";
-import {Router, router} from "./router";
-import GameModel from "./gameModel";
+import Router from "./router";
 
 export default class ResultWinPresenter {
   constructor(model, obj) {
     this.model = model;
     this.obj = obj;
-    this.content = new ResultWinView(this.model, this.obj);
+    this.content = new ResultWinView(this.model.currentState, this.obj);
     this.root = switchScreen(this.content.element);
   }
 
@@ -17,12 +16,10 @@ export default class ResultWinPresenter {
 
   showResult() {
     this.content.onSwitch = () => {
-      // router.model = new GameModel();
       Router.showWelcomeScreen();
     };
 
     this.content.onDrawWelcome = () => {
-      // router.model = new GameModel();
       Router.showWelcomeScreen();
     };
   }

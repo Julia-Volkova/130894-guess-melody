@@ -1,6 +1,6 @@
 import {switchScreen} from "./util";
 import WelcomeView from "./welcomeView";
-import {Router} from "./router";
+import Router from "./router";
 
 export default class WelcomePresenter {
   constructor(model) {
@@ -18,7 +18,6 @@ export default class WelcomePresenter {
       this.model.nextLevel();
       this.model.creationTimeFormat();
       Router.showPerformerScreen();
-      console.log(this.model.state);
     };
   }
 

@@ -1,15 +1,14 @@
 import GenreView from "./genreView";
 import {levels, results} from "./gameData";
 import {switchScreen} from "./util";
-import {Router, router} from "./router";
-import GameModel from "./gameModel";
+import Router from "./router";
 
 let timer;
 
 export default class GenrePresenter {
   constructor(model) {
     this.model = model;
-    this.content = new GenreView(this.model, levels[this.model.state.level]);
+    this.content = new GenreView(this.model.currentState, levels[this.model.state.level]);
     this.root = switchScreen(this.content.element);
     this.timer = timer;
     this.isTimerInit = false;
@@ -77,7 +76,6 @@ export default class GenrePresenter {
     };
 
     this.content.onDrawWelcome = () => {
-      // router.model = new GameModel();
       Router.showWelcomeScreen();
     };
   }

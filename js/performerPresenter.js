@@ -1,15 +1,14 @@
 import PerformerView from "./performerView";
 import {levels, results} from "./gameData";
 import {switchScreen} from "./util";
-import {Router, router} from "./router";
-import GameModel from "./gameModel";
+import Router from "./router";
 
 let timer;
 
 export default class PerformerPresenter {
   constructor(model) {
     this.model = model;
-    this.content = new PerformerView(this.model, levels[this.model.state.level]);
+    this.content = new PerformerView(this.model.currentState, levels[this.model.state.level]);
     this.root = switchScreen(this.content.element);
     this.timer = timer;
     this.isTimerInit = false;
@@ -36,7 +35,6 @@ export default class PerformerPresenter {
       this.model.nextLevel();
       this.stopTimer();
       this.isTimerInit = true;
-      console.log(this.model.state); 
 
       let currentAnswer = {
         correct: isCorrect,
@@ -52,7 +50,6 @@ export default class PerformerPresenter {
     };
 
     this.content.onDrawWelcome = () => {
-      // router.model = new GameModel();
       Router.showWelcomeScreen();
     };
   }
