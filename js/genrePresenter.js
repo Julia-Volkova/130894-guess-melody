@@ -25,6 +25,8 @@ export default class GenrePresenter {
       Router.showResultLoseTimesEndScreen();
     } else if (this.model.state.level === 11) {
       Router.showResultWinScreen();
+    } else if (levels[this.model.state.level].type === `performer`) {
+      Router.showPerformerScreen();
     } else {
       Router.showGenreScreen();
     }

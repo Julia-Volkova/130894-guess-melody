@@ -1,7 +1,8 @@
-const levels = {
-  '1': {
+const levels = [
+  {
     audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
     type: `performer`,
+    question: `Кто исполняет эту песню?`,
     answers: [
       {
         pic: `https://f4.bcbits.com/img/0004181452_10.jpg`,
@@ -20,9 +21,10 @@ const levels = {
       }
     ]
   },
-  '2': {
+  {
     audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
     type: `performer`,
+    question: `Кто исполняет эту песню?`,
     answers: [
       {
         pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
@@ -41,9 +43,10 @@ const levels = {
       }
     ]
   },
-  '3': {
+  {
     audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
     type: `performer`,
+    question: `Кто исполняет эту песню?`,
     answers: [
       {
         pic: `http://4.bp.blogspot.com/-kft9qu5ET6U/VPFUBi9W-MI/AAAAAAAACYM/UxXilXKYwOc/s1600/audionautix%2BHalf%2BSize.jpg`,
@@ -62,9 +65,10 @@ const levels = {
       }
     ]
   },
-  '4': {
+  {
     audio: `https://www.youtube.com/audiolibrary_download?vid=91624fdc22fc54ed`,
     type: `performer`,
+    question: `Кто исполняет эту песню?`,
     answers: [
       {
         pic: `https://i.vimeocdn.com/portrait/992615_300x300`,
@@ -83,9 +87,10 @@ const levels = {
       }
     ]
   },
-  '5': {
+  {
     audio: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
     type: `performer`,
+    question: `Кто исполняет эту песню?`,
     answers: [
       {
         pic: `https://i.ytimg.com/vi/jzgM3m8Vp1k/maxresdefault.jpg`,
@@ -104,9 +109,10 @@ const levels = {
       }
     ]
   },
-  '6': {
+  {
     genre: `Jazz`,
     type: `genre`,
+    question: `Выберите все подходящие песни`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
@@ -134,9 +140,10 @@ const levels = {
       }
     ]
   },
-  '7': {
+  {
     genre: `Electronic`,
     type: `genre`,
+    question: `Выберите все подходящие песни`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
@@ -164,9 +171,10 @@ const levels = {
       }
     ]
   },
-  '8': {
+  {
     genre: `Country`,
     type: `genre`,
+    question: `Выберите все подходящие песни`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=dfb828f40096184c`,
@@ -194,9 +202,10 @@ const levels = {
       }
     ]
   },
-  '9': {
+  {
     genre: `Pop`,
     type: `genre`,
+    question: `Выберите все подходящие песни`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=bcbe5be936a32fb1`,
@@ -224,9 +233,10 @@ const levels = {
       }
     ]
   },
-  '10': {
+  {
     genre: `Rock`,
     type: `genre`,
+    question: `Выберите все подходящие песни`,
     answers: [
       {
         audio: `https://www.youtube.com/audiolibrary_download?vid=a127d9b7de8a17cf`,
@@ -254,7 +264,7 @@ const levels = {
       }
     ]
   }
-};
+];
 
 const statisticLose = {
   livesEnd: {

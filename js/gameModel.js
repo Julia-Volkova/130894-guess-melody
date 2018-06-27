@@ -1,7 +1,8 @@
 import {timeCount, calcScores, showResultScreen, results} from "./gameData";
 
 export default class GameModel {
-  constructor() {
+  constructor(data) {
+    this.data = data;
     this.state = {
       points: 0,
       lives: 3,
@@ -37,6 +38,10 @@ export default class GameModel {
     this.state.statistics = statisticsInfo;
 
     return this.state;
+  }
+
+  getLevelNumber(levelNumber) {
+    return this.data[levelNumber];
   }
 
   nextLevel() {

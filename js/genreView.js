@@ -11,15 +11,15 @@ export default class GenreView extends AbstractView {
 
   get template() {
     return renderHeaderTemplate(this.modelState) + `<div class="main-wrap">
-      <h2 class="title">Выберите ${this.level.genre} треки</h2>
+      <h2 class="title">${this.level.question}</h2>
       <form class="genre">
       
       ${this.level.answers.map((answer, i) =>
     `<div class="genre-answer">
           <div class="player-wrapper">
             <div class="player">
-              <audio src="${answer.audio}" ${answer.autoplay ? `autoplay` : ``}></audio>
-              <button class="player-control ${answer.autoplay ? `player-control--pause` : `player-control--play`}"></button>
+              <audio src="${answer.audio}" ${i === 0 ? `autoplay` : ``}></audio>
+              <button class="player-control ${i === 0 ? `player-control--pause` : `player-control--play`}"></button>
               <div class="player-track">
                 <span class="player-status"></span>
               </div>

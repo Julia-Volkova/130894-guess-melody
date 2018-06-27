@@ -23,6 +23,9 @@ export default class WelcomeView extends AbstractView {
     playBtn.addEventListener(`click`, () => {
       this.onSwitch();
     });
+
+    this.main = this.element.querySelector(`.main--welcome`);
+    this.playBtn = this.element.querySelector(`.main-play`);
   }
 
   onSwitch() {

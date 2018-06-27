@@ -13,6 +13,18 @@ export default class WelcomePresenter {
     return this.root;
   }
 
+  startInitialisation() {
+    this.content.main.style.cursor = `wait`;
+    this.content.playBtn.style.cursor = `wait`;
+    this.content.playBtn.setAttribute(`disabled`, `disabled`);
+  }
+
+  stopInitialisation() {
+    this.content.main.style.cursor = `default`;
+    this.content.playBtn.style.cursor = `default`;
+    this.content.playBtn.removeAttribute(`disabled`);
+  }
+
   startGame() {
     this.content.onSwitch = () => {
       this.model.nextLevel();
