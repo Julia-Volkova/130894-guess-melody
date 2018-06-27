@@ -1,5 +1,5 @@
 import PerformerView from "./performerView";
-import {levels, results} from "./gameData";
+import {results} from "./gameData";
 import {switchScreen} from "./util";
 import Router from "./router";
 
@@ -8,7 +8,7 @@ let timer;
 export default class PerformerPresenter {
   constructor(model) {
     this.model = model;
-    this.content = new PerformerView(this.model.currentState, levels[this.model.state.level]);
+    this.content = new PerformerView(this.model.currentState, this.model.getLevelNumber(this.model.state.level));
     this.root = switchScreen(this.content.element);
     this.timer = timer;
     this.isTimerInit = false;
@@ -23,7 +23,9 @@ export default class PerformerPresenter {
       Router.showResultLoseLivesEndScreen();
     } else if (this.model.state.time === 0) {
       Router.showResultLoseTimesEndScreen();
-    } else if (levels[this.model.state.level].type === `genre`) {
+    } else if (this.model.state.level === 11) {
+      Router.showResultWinScreen();
+    } else if (this.model.getLevelNumber(this.model.state.level).type === `genre`) {
       Router.showGenreScreen();
     } else {
       Router.showPerformerScreen();
@@ -33,6 +35,7 @@ export default class PerformerPresenter {
   changeLevel() {
     this.content.onSwitch = (isCorrect) => {
       this.model.nextLevel();
+      this.answer();
       this.stopTimer();
       this.isTimerInit = true;
 
@@ -45,8 +48,6 @@ export default class PerformerPresenter {
       if (currentAnswer.correct === false) {
         this.model.loseLive();
       }
-
-      this.answer();
     };
 
     this.content.onDrawWelcome = () => {

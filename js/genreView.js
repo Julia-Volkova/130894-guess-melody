@@ -11,7 +11,7 @@ export default class GenreView extends AbstractView {
 
   get template() {
     return renderHeaderTemplate(this.modelState) + `<div class="main-wrap">
-      <h2 class="title">${this.level.question}</h2>
+      <h2 class="title">Уровень - ${this.modelState.level + 1} - ${this.level.question}</h2>
       <form class="genre">
       
       ${this.level.answers.map((answer, i) =>

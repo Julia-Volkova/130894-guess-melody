@@ -31,14 +31,27 @@ export default class Router {
       .then((data) => {
         questData = adaptServerData(data);
       })
-      .then(() => welcomePresenter.init())
+      .then(() => {
+        welcomePresenter.init();
+        Router.createNewModel();
+      })
       .catch(Router.showError)
       .then(() => welcomePresenter.stopInitialisation());
   }
 
-  static showPerformerScreen() {
-    console.log(questData);
+  static createNewModel() {
+    questData.forEach((el, index) => {
+      el.answers.forEach((item, i) => {
+        if (item.correct === true) {
+          console.log(`Уровень-${index + 1} = ${i + 1}`);
+        }
+      });
+    });
+    // console.log(questData);
     this.modelAfterInit = new GameModel(questData);
+  }
+
+  static showPerformerScreen() {
     const performerPresenter = new PerformerPresenter(this.modelAfterInit);
     performerPresenter.init();
   }

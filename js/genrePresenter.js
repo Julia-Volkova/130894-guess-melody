@@ -1,5 +1,5 @@
 import GenreView from "./genreView";
-import {levels, results} from "./gameData";
+import {results} from "./gameData";
 import {switchScreen} from "./util";
 import Router from "./router";
 
@@ -8,7 +8,7 @@ let timer;
 export default class GenrePresenter {
   constructor(model) {
     this.model = model;
-    this.content = new GenreView(this.model.currentState, levels[this.model.state.level]);
+    this.content = new GenreView(this.model.currentState, this.model.getLevelNumber(this.model.state.level));
     this.root = switchScreen(this.content.element);
     this.timer = timer;
     this.isTimerInit = false;
@@ -25,7 +25,7 @@ export default class GenrePresenter {
       Router.showResultLoseTimesEndScreen();
     } else if (this.model.state.level === 11) {
       Router.showResultWinScreen();
-    } else if (levels[this.model.state.level].type === `performer`) {
+    } else if (this.model.getLevelNumber(this.model.state.level).type === `performer`) {
       Router.showPerformerScreen();
     } else {
       Router.showGenreScreen();
@@ -56,6 +56,7 @@ export default class GenrePresenter {
     this.content.onSwitch = (evt, result, answers) => {
       evt.preventDefault();
       this.model.nextLevel();
+      this.answer();
       this.stopTimer();
       this.isTimerInit = true;
 
@@ -73,8 +74,6 @@ export default class GenrePresenter {
       if (currentAnswer.correct === false) {
         this.model.loseLive();
       }
-
-      this.answer();
     };
 
     this.content.onDrawWelcome = () => {

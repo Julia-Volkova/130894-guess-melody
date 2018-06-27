@@ -1,6 +1,7 @@
 import ResultWinView from "./resultWinView";
 import {switchScreen} from "./util";
 import Router from "./router";
+import {results} from "./gameData";
 
 export default class ResultWinPresenter {
   constructor(model, obj) {
@@ -8,6 +9,7 @@ export default class ResultWinPresenter {
     this.obj = obj;
     this.content = new ResultWinView(this.model.currentState, this.obj);
     this.root = switchScreen(this.content.element);
+    console.log(results);
   }
 
   get element() {
