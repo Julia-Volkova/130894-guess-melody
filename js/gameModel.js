@@ -44,6 +44,10 @@ export default class GameModel {
     return this.data[levelNumber];
   }
 
+  getFirstLevelType() {
+    return this.data[0].type;
+  }
+
   nextLevel() {
     return this.state.level++;
   }

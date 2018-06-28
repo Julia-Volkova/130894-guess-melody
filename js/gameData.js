@@ -280,7 +280,7 @@ const statisticLose = {
 let results = [];
 
 const calcScores = (answers, lives) => {
-  if (answers.length < 10 && lives > 0 || lives === 0) {
+  if (answers.length < 9 && lives > 0 || lives === 0) {
     return -1;
   }
 

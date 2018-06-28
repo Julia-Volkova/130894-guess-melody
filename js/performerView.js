@@ -11,7 +11,7 @@ export default class PerformerView extends AbstractView {
 
   get template() {
     return renderHeaderTemplate(this.modelState) + `<div class="main-wrap">
-      <h2 class="title main-title">Уровень - ${this.modelState.level + 1} - ${this.level.question}</h2>
+      <h2 class="title main-title">Уровень - ${this.modelState.level} - ${this.level.question}</h2>
       <div class="player-wrapper">
         <div class="player">
           <audio src="${this.level.audio}" autoplay></audio>

@@ -8,7 +8,7 @@ let timer;
 export default class GenrePresenter {
   constructor(model) {
     this.model = model;
-    this.content = new GenreView(this.model.currentState, this.model.getLevelNumber(this.model.state.level));
+    this.content = new GenreView(this.model.currentState, this.model.getLevelNumber(this.model.state.level - 1));
     this.root = switchScreen(this.content.element);
     this.timer = timer;
     this.isTimerInit = false;
@@ -25,37 +25,18 @@ export default class GenrePresenter {
       Router.showResultLoseTimesEndScreen();
     } else if (this.model.state.level === 11) {
       Router.showResultWinScreen();
-    } else if (this.model.getLevelNumber(this.model.state.level).type === `performer`) {
+    } else if (this.model.getLevelNumber(this.model.state.level - 1).type === `performer`) {
       Router.showPerformerScreen();
     } else {
       Router.showGenreScreen();
     }
   }
 
-  changeTimer() {
-    if (this.model.timer.isTimeout) {
-      Router.showResultLoseTimesEndScreen();
-      this.stopTimer();
-    }
-    this.model.creationTimeFormat();
-    this.model.updateTimer(this.content.timerMin, this.content.timerSec);
-    this.model.tick();
-    if (this.model.timer.remainingTime <= 30) {
-      this.content.timerContainer.classList.add(`timer-value--finished`);
-    }
-    this.timer = setTimeout(() => {
-      this.changeTimer();
-    }, 1000);
-  }
-
-  stopTimer() {
-    clearInterval(this.timer);
-  }
-
   changeLevel() {
     this.content.onSwitch = (evt, result, answers) => {
       evt.preventDefault();
       this.model.nextLevel();
+      console.log(this.model.state.level);
       this.answer();
       this.stopTimer();
       this.isTimerInit = true;
@@ -79,6 +60,26 @@ export default class GenrePresenter {
     this.content.onDrawWelcome = () => {
       Router.showWelcomeScreen();
     };
+  }
+
+  changeTimer() {
+    if (this.model.timer.isTimeout) {
+      Router.showResultLoseTimesEndScreen();
+      this.stopTimer();
+    }
+    this.model.creationTimeFormat();
+    this.model.updateTimer(this.content.timerMin, this.content.timerSec);
+    this.model.tick();
+    if (this.model.timer.remainingTime <= 30) {
+      this.content.timerContainer.classList.add(`timer-value--finished`);
+    }
+    this.timer = setTimeout(() => {
+      this.changeTimer();
+    }, 1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.timer);
   }
 
   init() {
