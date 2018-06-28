@@ -7,7 +7,7 @@ import {statisticLose} from "./gameData";
 import GameModel from "./gameModel";
 import ErrorView from "./ErrorView";
 import {showModal, switchScreen} from "./util";
-import {adaptServerData} from "./dataAdapt.test";
+import {adaptServerData} from "./dataAdapt";
 import SplashScreen from "./splashScreen";
 
 const checkStatus = (response) => {
@@ -18,18 +18,17 @@ const checkStatus = (response) => {
   }
 };
 
-let gameData;
-
 export default class Router {
   static start() {
+    this.gameDataFromServer = ``;
     const splash = new SplashScreen();
     switchScreen(splash.element);
     window.fetch(`https://es.dump.academy/guess-melody/questions`)
       .then(checkStatus)
       .then((response) => response.json())
       .then((data) => {
-        gameData = adaptServerData(data);
-        return gameData;
+        this.gameDataFromServer = adaptServerData(data);
+        return this.gameDataFromServer;
       })
       .then(() => {
         Router.showWelcomeScreen();
@@ -38,15 +37,7 @@ export default class Router {
   }
 
   static showWelcomeScreen() {
-    this.model = new GameModel(gameData);
-    console.log(gameData);
-    gameData.forEach((el, index) => {
-      el.answers.forEach((item, i) => {
-        if (item.correct === true) {
-          console.log(`Уровень-${index + 1} = ${i + 1}`);
-        }
-      });
-    });
+    this.model = new GameModel(this.gameDataFromServer);
     const welcomePresenter = new WelcomePresenter(this.model);
     welcomePresenter.init();
   }

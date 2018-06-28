@@ -36,25 +36,21 @@ export default class GenrePresenter {
     this.content.onSwitch = (evt, result, answers) => {
       evt.preventDefault();
       this.model.nextLevel();
-      console.log(this.model.state.level);
-      this.answer();
-      this.stopTimer();
-      this.isTimerInit = true;
-
       result = answers.every((el) => {
         return el === true;
       });
-
       let currentAnswer = {
         correct: result,
         time: 30
       };
-
       results.push(currentAnswer);
-
       if (currentAnswer.correct === false) {
         this.model.loseLive();
       }
+
+      this.answer();
+      this.stopTimer();
+      this.isTimerInit = true;
     };
 
     this.content.onDrawWelcome = () => {

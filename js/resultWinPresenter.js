@@ -9,8 +9,6 @@ export default class ResultWinPresenter {
     this.obj = obj;
     this.content = new ResultWinView(this.model.currentState, this.obj);
     this.root = switchScreen(this.content.element);
-    console.log(results);
-    console.log(results.length);
   }
 
   get element() {

@@ -16,7 +16,6 @@ export default class WelcomePresenter {
   startGame() {
     this.content.onSwitch = () => {
       this.model.nextLevel();
-      console.log(this.model.state.level);
       this.model.creationTimeFormat();
       if (this.model.getFirstLevelType() === `performer`) {
         Router.showPerformerScreen();

@@ -35,11 +35,6 @@ export default class PerformerPresenter {
   changeLevel() {
     this.content.onSwitch = (isCorrect) => {
       this.model.nextLevel();
-      console.log(this.model.state.level);
-      this.answer();
-      this.stopTimer();
-      this.isTimerInit = true;
-
       let currentAnswer = {
         correct: isCorrect,
         time: 30
@@ -49,6 +44,9 @@ export default class PerformerPresenter {
       if (currentAnswer.correct === false) {
         this.model.loseLive();
       }
+      this.answer();
+      this.stopTimer();
+      this.isTimerInit = true;
     };
 
     this.content.onDrawWelcome = () => {
