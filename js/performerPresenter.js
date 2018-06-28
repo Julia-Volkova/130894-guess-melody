@@ -50,7 +50,7 @@ export default class PerformerPresenter {
     };
 
     this.content.onDrawWelcome = () => {
-      Router.showWelcomeScreen();
+      Router.showModalConfirmation();
     };
   }
 

@@ -15,3 +15,7 @@ export const switchScreen = (element) => {
 export const showModal = (element) => {
   app.insertBefore(element, main);
 };
+
+export const removeElementFromDom = (element) => {
+  app.removeChild(element);
+};

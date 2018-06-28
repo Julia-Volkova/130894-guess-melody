@@ -9,6 +9,8 @@ import ErrorView from "./ErrorView";
 import {showModal, switchScreen} from "./util";
 import {adaptServerData} from "./dataAdapt";
 import SplashScreen from "./splashScreen";
+import PlayAgainView from "./playAgainView";
+import PlayAgainPresenter from "./playAgainPresenter";
 
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
@@ -70,5 +72,12 @@ export default class Router {
   static showError(error) {
     const errorModal = new ErrorView(error);
     showModal(errorModal.element);
+  }
+
+  static showModalConfirmation() {
+    // const modal = new PlayAgainView();
+    // showModal(modal.element);
+    const lol = new PlayAgainPresenter();
+    lol.init();
   }
 }

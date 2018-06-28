@@ -54,7 +54,7 @@ export default class GenrePresenter {
     };
 
     this.content.onDrawWelcome = () => {
-      Router.showWelcomeScreen();
+      Router.showModalConfirmation();
     };
   }
 
