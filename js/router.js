@@ -9,8 +9,8 @@ import ErrorView from "./ErrorView";
 import {showModal, switchScreen} from "./util";
 import {adaptServerData} from "./dataAdapt";
 import SplashScreen from "./splashScreen";
-import PlayAgainView from "./playAgainView";
-import PlayAgainPresenter from "./playAgainPresenter";
+import PlayAgainView from "./confirmationView";
+import ConfirmationPresenter from "./confirmationPresenter";
 
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
@@ -77,7 +77,7 @@ export default class Router {
   static showModalConfirmation() {
     // const modal = new PlayAgainView();
     // showModal(modal.element);
-    const lol = new PlayAgainPresenter();
-    lol.init();
+    const confirmation = new ConfirmationPresenter();
+    confirmation.init();
   }
 }

@@ -1,10 +1,10 @@
-import PlayAgainView from "./playAgainView";
+import ConfirmationView from "./confirmationView";
 import Router from "./router";
 import {showModal, removeElementFromDom} from "./util";
 
-export default class PlayAgainPresenter {
+export default class ConfirmationPresenter {
   constructor() {
-    this.content = new PlayAgainView();
+    this.content = new ConfirmationView();
     this.root = showModal(this.content.element);
   }
 
@@ -12,18 +12,18 @@ export default class PlayAgainPresenter {
     return this.root;
   }
 
-  ololo() {
+  chooseAction() {
     this.content.onCloseModal = () => {
-      removeElementFromDom(this.content.element);
+      removeElementFromDom(this.content.modalWrap);
     };
 
     this.content.onBackToStartGame = () => {
-      removeElementFromDom(this.content.element);
+      removeElementFromDom(this.content.modalWrap);
       Router.start();
     };
   }
 
   init() {
-    this.ololo();
+    this.chooseAction();
   }
 }

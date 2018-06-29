@@ -1,6 +1,6 @@
 import AbstractView from "./abstractView";
 
-export default class playAgainView extends AbstractView {
+export default class confirmationView extends AbstractView {
   constructor() {
     super();
   }
@@ -25,6 +25,7 @@ export default class playAgainView extends AbstractView {
     const closeModal = this.element.querySelector(`.modal-confirm__close`);
     const backToStartBtn = this.element.querySelector(`.modal-confirm__success`);
     const cancelBtn = this.element.querySelector(`.modal-confirm__cancel`);
+    // const confirmationWrap = this.element.querySelector(`.modal-confirm`);
     closeModal.addEventListener(`click`, () => {
       this.onCloseModal();
     });
@@ -34,6 +35,8 @@ export default class playAgainView extends AbstractView {
     cancelBtn.addEventListener(`click`, () => {
       this.onCloseModal();
     });
+
+    this.modalWrap = this.element.querySelector(`.modal-confirm`);
   }
 
   onBackToStartGame() {
