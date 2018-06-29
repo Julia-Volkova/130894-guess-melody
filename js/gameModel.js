@@ -1,4 +1,4 @@
-import {timeCount, calcScores, showResultScreen, results} from "./gameData";
+import {timeCount, calcScores, showResultScreen} from "./gameData";
 
 export default class GameModel {
   constructor(data) {
@@ -10,7 +10,8 @@ export default class GameModel {
       level: 0,
       fastAnswers: 0,
       statistics: ``,
-      timeFormat: ``
+      timeFormat: ``,
+      results: []
     };
     this.timer = timeCount(this.state.time);
     this.tick = this.tick.bind(this);
@@ -21,7 +22,7 @@ export default class GameModel {
   }
 
   computeFinalResult() {
-    this.state.points = calcScores(results, this.state.lives);
+    this.state.points = calcScores(this.state.results, this.state.lives);
 
     let calcFastAnswers = (arr) => {
       let count = 0;
@@ -34,7 +35,7 @@ export default class GameModel {
     };
     let statisticsInfo = showResultScreen([3, 7, 19, 14, 5, 13, 11], this.state);
 
-    this.state.fastAnswers = calcFastAnswers(results);
+    this.state.fastAnswers = calcFastAnswers(this.state.results);
     this.state.statistics = statisticsInfo;
 
     return this.state;

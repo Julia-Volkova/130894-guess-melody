@@ -1,5 +1,4 @@
 import PerformerView from "./performerView";
-import {results} from "./gameData";
 import {switchScreen} from "./util";
 import Router from "./router";
 
@@ -39,7 +38,7 @@ export default class PerformerPresenter {
         correct: isCorrect,
         time: 30
       };
-      results.push(currentAnswer);
+      this.model.state.results.push(currentAnswer);
 
       if (currentAnswer.correct === false) {
         this.model.loseLive();

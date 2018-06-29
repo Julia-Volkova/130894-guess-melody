@@ -9,7 +9,6 @@ import ErrorView from "./ErrorView";
 import {showModal, switchScreen} from "./util";
 import {adaptServerData} from "./dataAdapt";
 import SplashScreen from "./splashScreen";
-import PlayAgainView from "./confirmationView";
 import ConfirmationPresenter from "./confirmationPresenter";
 
 const checkStatus = (response) => {
@@ -75,8 +74,6 @@ export default class Router {
   }
 
   static showModalConfirmation() {
-    // const modal = new PlayAgainView();
-    // showModal(modal.element);
     const confirmation = new ConfirmationPresenter();
     confirmation.init();
   }

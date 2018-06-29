@@ -1,7 +1,6 @@
 import ResultWinView from "./resultWinView";
 import {switchScreen} from "./util";
 import Router from "./router";
-import {results} from "./gameData";
 
 export default class ResultWinPresenter {
   constructor(model, obj) {

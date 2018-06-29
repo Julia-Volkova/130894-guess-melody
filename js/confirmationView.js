@@ -25,7 +25,6 @@ export default class confirmationView extends AbstractView {
     const closeModal = this.element.querySelector(`.modal-confirm__close`);
     const backToStartBtn = this.element.querySelector(`.modal-confirm__success`);
     const cancelBtn = this.element.querySelector(`.modal-confirm__cancel`);
-    // const confirmationWrap = this.element.querySelector(`.modal-confirm`);
     closeModal.addEventListener(`click`, () => {
       this.onCloseModal();
     });
