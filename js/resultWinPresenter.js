@@ -20,7 +20,7 @@ export default class ResultWinPresenter {
     };
 
     this.content.onDrawWelcome = () => {
-      Router.showWelcomeScreen();
+      Router.start();
     };
   }
 

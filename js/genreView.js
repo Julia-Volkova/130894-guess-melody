@@ -1,6 +1,7 @@
 import AbstractView from "./abstractView";
 import controlPlayer from "./controlPlayer";
 import renderHeaderTemplate from "./header";
+import setupPlaybackList from "./setupPlaybackList";
 
 export default class GenreView extends AbstractView {
   constructor(modelState, level) {
@@ -44,7 +45,7 @@ export default class GenreView extends AbstractView {
 
     [...playerControls].forEach((elem) => {
       let audio = elem.previousElementSibling;
-      controlPlayer(elem, audio);
+      setupPlaybackList(elem, audio, [...playerControls]);
     });
 
     btnAnswered.setAttribute(`disabled`, `disabled`);

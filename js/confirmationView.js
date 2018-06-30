@@ -25,14 +25,14 @@ export default class confirmationView extends AbstractView {
     const closeModal = this.element.querySelector(`.modal-confirm__close`);
     const backToStartBtn = this.element.querySelector(`.modal-confirm__success`);
     const cancelBtn = this.element.querySelector(`.modal-confirm__cancel`);
-    closeModal.addEventListener(`click`, () => {
-      this.onCloseModal();
+    closeModal.addEventListener(`click`, (evt) => {
+      this.onCloseModal(evt);
     });
-    backToStartBtn.addEventListener(`click`, () => {
-      this.onBackToStartGame();
+    backToStartBtn.addEventListener(`click`, (evt) => {
+      this.onBackToStartGame(evt);
     });
-    cancelBtn.addEventListener(`click`, () => {
-      this.onCloseModal();
+    cancelBtn.addEventListener(`click`, (evt) => {
+      this.onCloseModal(evt);
     });
 
     this.modalWrap = this.element.querySelector(`.modal-confirm`);

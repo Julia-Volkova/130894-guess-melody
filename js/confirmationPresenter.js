@@ -13,11 +13,13 @@ export default class ConfirmationPresenter {
   }
 
   chooseAction() {
-    this.content.onCloseModal = () => {
+    this.content.onCloseModal = (evt) => {
+      evt.preventDefault();
       removeElementFromDom(this.content.modalWrap);
     };
 
-    this.content.onBackToStartGame = () => {
+    this.content.onBackToStartGame = (evt) => {
+      evt.preventDefault();
       removeElementFromDom(this.content.modalWrap);
       Router.start();
     };
