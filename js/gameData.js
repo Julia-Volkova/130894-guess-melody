@@ -9,28 +9,28 @@ const statisticLose = {
   }
 };
 
-const calcScores = (answers, lives) => {
-  if (answers.length < 9 && lives > 0 || lives === 0) {
-    return -1;
-  }
-
-  let points = 0;
-  answers.forEach((elem) => {
-    if (elem.correct && elem.time >= 30) {
-      points++;
-    } else if (elem.correct && elem.time < 30) {
-      points += 2;
-    } else if (!elem.correct) {
-      points -= 2;
-    }
-  });
-
-  if (points < 0) {
-    points = 0;
-  }
-
-  return points;
-};
+// const calcScores = (answers, lives) => {
+//   if (answers.length < 9 && lives > 0 || lives === 0) {
+//     return -1;
+//   }
+//
+//   let points = 0;
+//   answers.forEach((elem) => {
+//     if (elem.correct && elem.time >= 30) {
+//       points++;
+//     } else if (elem.correct && elem.time < 30) {
+//       points += 2;
+//     } else if (!elem.correct) {
+//       points -= 2;
+//     }
+//   });
+//
+//   if (points < 0) {
+//     points = 0;
+//   }
+//
+//   return points;
+// };
 
 const showResultScreen = (otherResults, yourResult) => {
   if (yourResult.time === 0) {
@@ -38,13 +38,9 @@ const showResultScreen = (otherResults, yourResult) => {
   } else if (yourResult.lives === 0) {
     return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
   } else {
-    otherResults.push({score: yourResult});
-    let otherResultArr = [];
-    otherResults.forEach((elem) => {
-      otherResultArr.push(elem.score);
-    });
-console.log(otherResultArr);
-    let filteredResults = otherResultArr.sort((a, b) => b - a);
+    otherResults.push(yourResult);
+
+    let filteredResults = otherResults.sort((a, b) => b - a);
     let yourIndex = filteredResults.indexOf(yourResult);
     let place = yourIndex + 1;
     let gamerCount = filteredResults.length;
@@ -73,4 +69,4 @@ const timeCount = (startTime) => {
   return time;
 };
 
-export {statisticLose, calcScores, showResultScreen, timeCount};
+export {statisticLose, showResultScreen, timeCount};

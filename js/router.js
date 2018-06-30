@@ -13,14 +13,6 @@ import ConfirmationPresenter from "./confirmationPresenter";
 import LoadFinalResultPresenter from "./loadFinalResultPresenter";
 import Loader from "./loader";
 
-const checkStatus = (response) => {
-  if (response.ok) {
-    return response;
-  } else {
-    throw new Error(`${response.status}: ${response.statusText}`);
-  }
-};
-
 export default class Router {
   static start() {
     this.gameDataFromServer = ``;
@@ -71,7 +63,7 @@ export default class Router {
     resultLosePresenter.init();
   }
 
-  static showResultWinScreen() {
+  static showResultWinScreen(data) {
     const resultWinPresenter = new ResultWinPresenter(this.model, this.model.computeFinalResult(data));
     resultWinPresenter.init();
   }
@@ -87,15 +79,20 @@ export default class Router {
   }
 
   static showStatisticScreen() {
-    this.gameResults = ``;
+    this.allResults = [];
     const loadFinalResult = new LoadFinalResultPresenter(this.model);
     loadFinalResult.init();
-    // Нужно посчитать количество набранных баллов
-    Loader.saveResults({score: this.model.currentState.points})
+    this.model.calcScores();
+    Loader.saveResults({score: this.model.state.points})
       .catch(Router.showError);
     Loader.loadResults()
-      .then((data) => console.log(data))
-      .catch(Router.showError);
+      .then((data) => {
+        data.forEach((elem) => {
+          this.allResults.push(elem.score);
+        });
+        Router.showResultWinScreen(this.allResults);
+      });
+    // .catch(Router.showError);
 
 
     // window.fetch(`https://es.dump.academy/guess-melody/stats/90576382`, {

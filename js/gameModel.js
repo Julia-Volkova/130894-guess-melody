@@ -22,12 +22,27 @@ export default class GameModel {
   }
 
   calcScores() {
+    if (this.state.results.length < 9 && this.state.lives > 0 || this.state.lives === 0) {
+      return -1;
+    }
 
+    this.state.results.forEach((elem) => {
+      if (elem.correct && elem.time >= 30) {
+        this.state.points++;
+      } else if (elem.correct && elem.time < 30) {
+        this.state.points += 2;
+      } else if (!elem.correct) {
+        this.state.points -= 2;
+      }
+    });
+
+    if (this.state.points < 0) {
+      this.state.points = 0;
+    }
+    return this.state.points;
   }
 
   computeFinalResult(otherResults) {
-    this.state.points = calcScores(this.state.results, this.state.lives);
-
     let calcFastAnswers = (arr) => {
       let count = 0;
       arr.forEach((elem) => {

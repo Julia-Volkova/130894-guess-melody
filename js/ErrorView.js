@@ -4,7 +4,6 @@ export default class ErrorView extends AbstractView {
   constructor(error) {
     super();
     this.error = error;
-    console.log(this.error);
   }
 
   get template() {

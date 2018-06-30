@@ -1,8 +1,5 @@
-import {adaptServerData} from "./adaptServerData";
-
 const SERVER_URL = `https://es.dump.academy/guess-melody`;
-const DEFAULT_NAME = `o0`;
-const APP_ID = 90576382;
+const APP_ID = 90576384;
 const toJSON = (res) => res.json();
 
 const checkStatus = (response) => {
@@ -15,7 +12,7 @@ const checkStatus = (response) => {
 
 const checkStatusLoad = (response) => {
   if (response.ok) {
-    return toJSON(response);
+    return response;
   } else if (response.status === 404) {
     return [];
   }
@@ -44,7 +41,7 @@ export default class Loader {
         'Content-Type': `application/json`
       }
     };
-    return fetch(`${SERVER_URL}/stats/${APP_ID}`, requestSettings)
-      .then(checkStatus);
+   return fetch(`${SERVER_URL}/stats/${APP_ID}`, requestSettings)
+      .then(checkStatusLoad);
   }
 }
