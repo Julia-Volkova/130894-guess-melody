@@ -17,5 +17,39 @@ export const showModal = (element) => {
 };
 
 export const removeElementFromDom = (element) => {
+  console.log(element);
   app.removeChild(element);
 };
+
+export const calculateLevelTime = (start) => {
+  const end = new Date();
+  return Math.ceil((end - start) / 1000);
+};
+
+export const getMinutesAndSeconds = (sec) => {
+  const minutes = Math.floor(sec / 60);
+  return {
+    minutes,
+    seconds: sec - (minutes * 60)
+  };
+};
+
+export const getPassedTime = (remainingSec) => {
+  const passedTime = getMinutesAndSeconds(300 - remainingSec);
+};
+
+export const getNoun = (number, one, two, five) => {
+  let n = Math.abs(number);
+  n %= 100;
+  if (n >= 5 && n <= 20) {
+    return five;
+  }
+  n %= 10;
+  if (n === 1) {
+    return one;
+  }
+  if (n >= 2 && n <= 4) {
+    return two;
+  }
+  return five;
+}

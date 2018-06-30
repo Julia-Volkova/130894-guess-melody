@@ -1,4 +1,5 @@
 import {timeCount, calcScores, showResultScreen} from "./gameData";
+import {getMinutesAndSeconds} from "./util";
 
 export default class GameModel {
   constructor(data) {
@@ -19,6 +20,10 @@ export default class GameModel {
 
   get currentState() {
     return this.state;
+  }
+
+  get currentTime() {
+    return this.timer;
   }
 
   calcScores() {
@@ -86,8 +91,7 @@ export default class GameModel {
   }
 
   creationTimeFormat() {
-    let minutes = Math.floor(this.timer.remainingTime / 60);
-    let seconds = this.timer.remainingTime - (minutes * 60);
+    let {minutes, seconds} = getMinutesAndSeconds(this.timer.remainingTime);
     if (minutes.toString().length < 2) {
       minutes = `0` + minutes;
     }

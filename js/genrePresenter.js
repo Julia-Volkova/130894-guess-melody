@@ -1,5 +1,5 @@
 import GenreView from "./genreView";
-import {switchScreen} from "./util";
+import {calculateLevelTime, switchScreen} from "./util";
 import Router from "./router";
 
 let timer;
@@ -33,6 +33,7 @@ export default class GenrePresenter {
   }
 
   changeLevel() {
+    const start = new Date();
     this.content.onSwitch = (evt, result, answers) => {
       evt.preventDefault();
       this.model.nextLevel();
@@ -41,7 +42,7 @@ export default class GenrePresenter {
       });
       let currentAnswer = {
         correct: result,
-        time: 30
+        time: calculateLevelTime(start)
       };
       this.model.state.results.push(currentAnswer);
       if (currentAnswer.correct === false) {
@@ -80,6 +81,8 @@ export default class GenrePresenter {
 
   init() {
     this.changeLevel();
+
+    // calculateLevelTime();
 
     if (this.isTimerInit === false) {
       this.changeTimer();

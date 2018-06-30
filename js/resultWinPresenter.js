@@ -6,7 +6,7 @@ export default class ResultWinPresenter {
   constructor(model, obj) {
     this.model = model;
     this.obj = obj;
-    this.content = new ResultWinView(this.model.currentState, this.obj);
+    this.content = new ResultWinView(this.model.currentState, this.obj, this.model.currentTime);
     this.root = switchScreen(this.content.element);
   }
 

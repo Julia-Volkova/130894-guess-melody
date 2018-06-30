@@ -1,5 +1,5 @@
 import PerformerView from "./performerView";
-import {switchScreen} from "./util";
+import {calculateLevelTime, switchScreen} from "./util";
 import Router from "./router";
 
 let timer;
@@ -33,11 +33,12 @@ export default class PerformerPresenter {
   }
 
   changeLevel() {
+    const start = new Date();
     this.content.onSwitch = (isCorrect) => {
       this.model.nextLevel();
       let currentAnswer = {
         correct: isCorrect,
-        time: 30
+        time: calculateLevelTime(start)
       };
       this.model.state.results.push(currentAnswer);
 
@@ -77,6 +78,7 @@ export default class PerformerPresenter {
 
   init() {
     this.changeLevel();
+    // calculateLevelTime();
 
     if (this.isTimerInit === false) {
       this.changeTimer();

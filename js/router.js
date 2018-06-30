@@ -6,7 +6,7 @@ import ResultWinPresenter from "./resultWinPresenter";
 import {statisticLose} from "./gameData";
 import GameModel from "./gameModel";
 import ErrorView from "./ErrorView";
-import {showModal, switchScreen} from "./util";
+import {removeElementFromDom, showModal, switchScreen} from "./util";
 import {adaptServerData} from "./adaptServerData";
 import SplashScreen from "./splashScreen";
 import ConfirmationPresenter from "./confirmationPresenter";
@@ -26,8 +26,8 @@ export default class Router {
       .then(() => {
         Router.showWelcomeScreen();
       })
-      .catch(Router.showError);
-    // .then(() => removeElementFromDom(splash.element.wrap));
+      .catch(Router.showError)
+      .then(() => splash.wrap.parentNode && splash.wrap.parentNode.removeChild(splash.wrap));
   }
 
   static showWelcomeScreen() {
@@ -91,8 +91,8 @@ export default class Router {
           this.allResults.push(elem.score);
         });
         Router.showResultWinScreen(this.allResults);
-      });
-    // .catch(Router.showError);
+      })
+      .catch(Router.showError);
 
 
     // window.fetch(`https://es.dump.academy/guess-melody/stats/90576382`, {
