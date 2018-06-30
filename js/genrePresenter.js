@@ -23,7 +23,6 @@ export default class GenrePresenter {
     } else if (this.model.state.time === 0) {
       Router.showResultLoseTimesEndScreen();
     } else if (this.model.state.level === 11) {
-      // Router.showResultWinScreen();
       Router.showStatisticScreen();
     } else if (this.model.getLevelNumber(this.model.state.level - 1).type === `performer`) {
       Router.showPerformerScreen();
@@ -36,10 +35,21 @@ export default class GenrePresenter {
     const start = new Date();
     this.content.onSwitch = (evt, result, answers) => {
       evt.preventDefault();
+      const data = this.model.data[this.model.state.level - 1];
+      let countOfCorrectAnswers = 0;
+      data.answers.forEach((elem) => {
+        if (elem.correct) {
+          countOfCorrectAnswers++;
+        }
+      });
+
       this.model.nextLevel();
       result = answers.every((el) => {
         return el === true;
       });
+      if (result) {
+        result = (answers.length === countOfCorrectAnswers);
+      }
       let currentAnswer = {
         correct: result,
         time: calculateLevelTime(start)

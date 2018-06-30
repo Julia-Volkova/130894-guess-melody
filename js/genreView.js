@@ -1,5 +1,4 @@
 import AbstractView from "./abstractView";
-import controlPlayer from "./controlPlayer";
 import renderHeaderTemplate from "./header";
 import setupPlaybackList from "./setupPlaybackList";
 

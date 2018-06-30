@@ -6,7 +6,7 @@ import ResultWinPresenter from "./resultWinPresenter";
 import {statisticLose} from "./gameData";
 import GameModel from "./gameModel";
 import ErrorView from "./ErrorView";
-import {removeElementFromDom, showModal, switchScreen} from "./util";
+import {showModal, switchScreen} from "./util";
 import {adaptServerData} from "./adaptServerData";
 import SplashScreen from "./splashScreen";
 import ConfirmationPresenter from "./confirmationPresenter";
@@ -32,13 +32,6 @@ export default class Router {
 
   static showWelcomeScreen() {
     this.model = new GameModel(this.gameDataFromServer);
-    this.gameDataFromServer.forEach((el, index) => {
-      el.answers.forEach((item, i) => {
-        if (item.correct === true) {
-          console.log(`Уровень-${index + 1} = ${i + 1}`);
-        }
-      });
-    });
     const welcomePresenter = new WelcomePresenter(this.model);
     welcomePresenter.init();
   }
@@ -93,30 +86,5 @@ export default class Router {
         Router.showResultWinScreen(this.allResults);
       })
       .catch(Router.showError);
-
-
-    // window.fetch(`https://es.dump.academy/guess-melody/stats/90576382`, {
-    //   method: `POST`,
-    //   body: JSON.stringify({
-    //     score: this.model.currentState.points
-    //   }),
-    //   headers: {
-    //     'Content-Type': `application/json`
-    //   }
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       return response;
-    //     } else if (response.status === 404) {
-    //       return [];
-    //     }
-    //     throw new Error(`Неизвестный статус: ${response.status} ${response.statusText}`);
-    //   }).catch(Router.showError);
-    //
-    // window.fetch(`https://es.dump.academy/guess-melody/stats/90576382`)
-    //   .then(checkStatus)
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data))
-    //   .catch(Router.showError);
   }
 }

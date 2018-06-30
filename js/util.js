@@ -17,7 +17,6 @@ export const showModal = (element) => {
 };
 
 export const removeElementFromDom = (element) => {
-  console.log(element);
   app.removeChild(element);
 };
 
@@ -34,10 +33,6 @@ export const getMinutesAndSeconds = (sec) => {
   };
 };
 
-export const getPassedTime = (remainingSec) => {
-  const passedTime = getMinutesAndSeconds(300 - remainingSec);
-};
-
 export const getNoun = (number, one, two, five) => {
   let n = Math.abs(number);
   n %= 100;
@@ -52,4 +47,4 @@ export const getNoun = (number, one, two, five) => {
     return two;
   }
   return five;
-}
+};

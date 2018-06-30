@@ -1,4 +1,4 @@
-import {getNoun, switchScreen} from "./util";
+import {switchScreen} from "./util";
 import WelcomeView from "./welcomeView";
 import Router from "./router";
 

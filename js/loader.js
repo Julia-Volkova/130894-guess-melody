@@ -41,7 +41,7 @@ export default class Loader {
         'Content-Type': `application/json`
       }
     };
-   return fetch(`${SERVER_URL}/stats/${APP_ID}`, requestSettings)
+    return fetch(`${SERVER_URL}/stats/${APP_ID}`, requestSettings)
       .then(checkStatusLoad);
   }
 }
