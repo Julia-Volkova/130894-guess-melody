@@ -38,9 +38,14 @@ const showResultScreen = (otherResults, yourResult) => {
   } else if (yourResult.lives === 0) {
     return `У вас закончились все попытки. Ничего, повезёт в следующий раз!`;
   } else {
-    otherResults.push(yourResult.points);
-    let filteredResults = otherResults.sort((a, b) => b - a);
-    let yourIndex = filteredResults.indexOf(yourResult.points);
+    otherResults.push({score: yourResult});
+    let otherResultArr = [];
+    otherResults.forEach((elem) => {
+      otherResultArr.push(elem.score);
+    });
+console.log(otherResultArr);
+    let filteredResults = otherResultArr.sort((a, b) => b - a);
+    let yourIndex = filteredResults.indexOf(yourResult);
     let place = yourIndex + 1;
     let gamerCount = filteredResults.length;
     let fractional = ((gamerCount - 1) - yourIndex) / gamerCount;

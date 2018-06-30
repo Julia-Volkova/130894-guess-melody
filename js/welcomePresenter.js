@@ -17,11 +17,12 @@ export default class WelcomePresenter {
     this.content.onSwitch = () => {
       this.model.nextLevel();
       this.model.creationTimeFormat();
-      if (this.model.getFirstLevelType() === `performer`) {
-        Router.showPerformerScreen();
-      } else {
-        Router.showGenreScreen();
-      }
+      Router.showStatisticScreen();
+      // if (this.model.getFirstLevelType() === `performer`) {
+      //   Router.showPerformerScreen();
+      // } else {
+      //   Router.showGenreScreen();
+      // }
     };
   }
 

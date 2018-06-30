@@ -14,4 +14,8 @@ export default class SplashScreen extends AbstractView {
 </div>
     `;
   }
+
+  bind() {
+    this.wrap = this.element.querySelector(`.modal-error__wrap`);
+  }
 }

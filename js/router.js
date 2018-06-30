@@ -7,12 +7,14 @@ import {statisticLose} from "./gameData";
 import GameModel from "./gameModel";
 import ErrorView from "./ErrorView";
 import {showModal, switchScreen} from "./util";
-import {adaptServerData} from "./dataAdapt";
+import {adaptServerData} from "./adaptServerData";
 import SplashScreen from "./splashScreen";
 import ConfirmationPresenter from "./confirmationPresenter";
+import LoadFinalResultPresenter from "./loadFinalResultPresenter";
+import Loader from "./loader";
 
 const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300) {
+  if (response.ok) {
     return response;
   } else {
     throw new Error(`${response.status}: ${response.statusText}`);
@@ -24,9 +26,7 @@ export default class Router {
     this.gameDataFromServer = ``;
     const splash = new SplashScreen();
     switchScreen(splash.element);
-    window.fetch(`https://es.dump.academy/guess-melody/questions`)
-      .then(checkStatus)
-      .then((response) => response.json())
+    Loader.loadData()
       .then((data) => {
         this.gameDataFromServer = adaptServerData(data);
         return this.gameDataFromServer;
@@ -35,10 +35,18 @@ export default class Router {
         Router.showWelcomeScreen();
       })
       .catch(Router.showError);
+    // .then(() => removeElementFromDom(splash.element.wrap));
   }
 
   static showWelcomeScreen() {
     this.model = new GameModel(this.gameDataFromServer);
+    this.gameDataFromServer.forEach((el, index) => {
+      el.answers.forEach((item, i) => {
+        if (item.correct === true) {
+          console.log(`Уровень-${index + 1} = ${i + 1}`);
+        }
+      });
+    });
     const welcomePresenter = new WelcomePresenter(this.model);
     welcomePresenter.init();
   }
@@ -64,7 +72,7 @@ export default class Router {
   }
 
   static showResultWinScreen() {
-    const resultWinPresenter = new ResultWinPresenter(this.model, this.model.computeFinalResult());
+    const resultWinPresenter = new ResultWinPresenter(this.model, this.model.computeFinalResult(data));
     resultWinPresenter.init();
   }
 
@@ -76,5 +84,42 @@ export default class Router {
   static showModalConfirmation() {
     const confirmation = new ConfirmationPresenter();
     confirmation.init();
+  }
+
+  static showStatisticScreen() {
+    this.gameResults = ``;
+    const loadFinalResult = new LoadFinalResultPresenter(this.model);
+    loadFinalResult.init();
+    // Нужно посчитать количество набранных баллов
+    Loader.saveResults({score: this.model.currentState.points})
+      .catch(Router.showError);
+    Loader.loadResults()
+      .then((data) => console.log(data))
+      .catch(Router.showError);
+
+
+    // window.fetch(`https://es.dump.academy/guess-melody/stats/90576382`, {
+    //   method: `POST`,
+    //   body: JSON.stringify({
+    //     score: this.model.currentState.points
+    //   }),
+    //   headers: {
+    //     'Content-Type': `application/json`
+    //   }
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       return response;
+    //     } else if (response.status === 404) {
+    //       return [];
+    //     }
+    //     throw new Error(`Неизвестный статус: ${response.status} ${response.statusText}`);
+    //   }).catch(Router.showError);
+    //
+    // window.fetch(`https://es.dump.academy/guess-melody/stats/90576382`)
+    //   .then(checkStatus)
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data))
+    //   .catch(Router.showError);
   }
 }

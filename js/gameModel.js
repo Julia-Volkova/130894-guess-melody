@@ -21,7 +21,11 @@ export default class GameModel {
     return this.state;
   }
 
-  computeFinalResult() {
+  calcScores() {
+
+  }
+
+  computeFinalResult(otherResults) {
     this.state.points = calcScores(this.state.results, this.state.lives);
 
     let calcFastAnswers = (arr) => {
@@ -33,7 +37,7 @@ export default class GameModel {
       });
       return count;
     };
-    let statisticsInfo = showResultScreen([3, 7, 19, 14, 5, 13, 11], this.state);
+    let statisticsInfo = showResultScreen(otherResults, this.state.points);
 
     this.state.fastAnswers = calcFastAnswers(this.state.results);
     this.state.statistics = statisticsInfo;

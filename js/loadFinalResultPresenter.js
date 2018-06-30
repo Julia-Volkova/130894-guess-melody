@@ -1,12 +1,11 @@
-import ResultWinView from "./resultWinView";
+import LoadFinalResultView from "./loadFinalResultView";
 import {switchScreen} from "./util";
 import Router from "./router";
 
 export default class ResultWinPresenter {
-  constructor(model, obj) {
+  constructor(model) {
     this.model = model;
-    this.obj = obj;
-    this.content = new ResultWinView(this.model.currentState, this.obj);
+    this.content = new LoadFinalResultView(this.model.currentState);
     this.root = switchScreen(this.content.element);
   }
 
