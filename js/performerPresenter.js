@@ -78,7 +78,6 @@ export default class PerformerPresenter {
 
   init() {
     this.changeLevel();
-    // calculateLevelTime();
 
     if (this.isTimerInit === false) {
       this.changeTimer();

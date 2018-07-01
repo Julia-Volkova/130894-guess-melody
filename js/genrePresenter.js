@@ -92,8 +92,6 @@ export default class GenrePresenter {
   init() {
     this.changeLevel();
 
-    // calculateLevelTime();
-
     if (this.isTimerInit === false) {
       this.changeTimer();
     }

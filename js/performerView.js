@@ -25,7 +25,7 @@ export default class PerformerView extends AbstractView {
       ${this.level.answers.map((answer) =>
     `<div class="main-answer-wrapper" data-correct="${answer.correct}">
       <input class="main-answer-r" type="radio" id="answer-1" name="answer" value="val-1"/>
-       <label class="main-answer" for="answer-1">
+       <label class="main-answer" for="answer-1" style="pointer-events: none;">
       <img class="main-answer-preview" src="${answer.pic}"
              alt="${answer.artist}" width="134" height="134">
         ${answer.artist}
