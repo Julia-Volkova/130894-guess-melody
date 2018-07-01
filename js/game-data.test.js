@@ -1,5 +1,5 @@
 import {assert} from 'chai';
-import {calcScores, showResultScreen, timeCount} from "./gameData";
+import {calcScores, showResultScreen, timeCount} from "./game-data";
 
 const gameResultTestOne = [
   {

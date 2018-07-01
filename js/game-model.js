@@ -1,4 +1,4 @@
-import {timeCount, showResultScreen} from "./gameData";
+import {timeCount, showResultScreen} from "./game-data";
 import {getMinutesAndSeconds} from "./util";
 
 export default class GameModel {

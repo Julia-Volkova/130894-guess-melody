@@ -1,4 +1,4 @@
-import ResultLoseView from "./resultLoseView";
+import ResultLoseView from "./result-lose-view";
 import {switchScreen} from "./util";
 import Router from "./router";
 

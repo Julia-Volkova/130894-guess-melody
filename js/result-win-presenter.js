@@ -1,4 +1,4 @@
-import ResultWinView from "./resultWinView";
+import ResultWinView from "./result-win-view";
 import {switchScreen} from "./util";
 import Router from "./router";
 

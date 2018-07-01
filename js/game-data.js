@@ -27,6 +27,29 @@ const showResultScreen = (otherResults, yourResult) => {
   }
 };
 
+const calcScores = (answers, lives) => {
+  if (answers.length < 10 && lives > 0 || lives === 0) {
+    return -1;
+  }
+
+  let points = 0;
+  answers.forEach((elem) => {
+    if (elem.correct && elem.time >= 30) {
+      points++;
+    } else if (elem.correct && elem.time < 30) {
+      points += 2;
+    } else if (!elem.correct) {
+      points -= 2;
+    }
+  });
+
+  if (points < 0) {
+    points = 0;
+  }
+
+  return points;
+};
+
 const timeCount = (startTime) => {
   let time = {
     remainingTime: startTime,
@@ -46,4 +69,4 @@ const timeCount = (startTime) => {
   return time;
 };
 
-export {statisticLose, showResultScreen, timeCount};
+export {statisticLose, calcScores, showResultScreen, timeCount};

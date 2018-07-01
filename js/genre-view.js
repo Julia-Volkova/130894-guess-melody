@@ -1,6 +1,6 @@
-import AbstractView from "./abstractView";
+import AbstractView from "./abstract-view";
 import renderHeaderTemplate from "./header";
-import setupPlaybackList from "./setupPlaybackList";
+import setupPlaybackList from "./setup-playback-list";
 
 export default class GenreView extends AbstractView {
   constructor(modelState, level) {

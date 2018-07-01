@@ -1,6 +1,9 @@
-import AbstractView from "./abstractView";
+import AbstractView from "./abstract-view";
 import renderHeaderTemplate from "./header";
 import {getMinutesAndSeconds, getNoun} from "./util";
+
+const LIVE_COUNT = 3;
+const START_TIME = 300;
 
 export default class ResultWinView extends AbstractView {
   constructor(modelState, result, timer) {
@@ -8,7 +11,7 @@ export default class ResultWinView extends AbstractView {
     this.modelState = modelState;
     this.result = result;
     this.timer = timer;
-    this.passedTime = getMinutesAndSeconds(300 - this.timer.remainingTime);
+    this.passedTime = getMinutesAndSeconds(START_TIME - this.timer.remainingTime);
     this.minutes = this.passedTime.minutes ? `${this.passedTime.minutes}&nbsp;${getNoun(this.passedTime.minutes, `минуту`, `минуты`, `минут`)}` : ``;
     this.seconds = this.passedTime.seconds ? `${this.passedTime.seconds}&nbsp;${getNoun(this.passedTime.seconds, `секунду`, `секунды`, `секунд`)}` : ``;
   }
@@ -20,7 +23,7 @@ export default class ResultWinView extends AbstractView {
     <h2 class="title">Вы настоящий меломан!</h2>
     <div class="main-stat">За&nbsp;${this.minutes}${this.passedTime.minutes && this.passedTime.seconds ? ` и ` : ``}${this.seconds}
       <br>вы&nbsp;набрали ${this.result.points} ${getNoun(this.result.points, `балл`, `балла`, `баллов`)} (${this.result.fastAnswers} ${getNoun(this.result.points, `быстрый`, `быстрых`, `быстрых`)})
-      <br>совершив ${3 - this.result.lives} ${getNoun(3 - this.result.lives, `ошибку`, `ошибки`, `ошибок`)}</div>
+      <br>совершив ${LIVE_COUNT - this.result.lives} ${getNoun(LIVE_COUNT - this.result.lives, `ошибку`, `ошибки`, `ошибок`)}</div>
     <span class="main-comparison">${this.result.statistics}</span>
     <span role="button" tabindex="0" class="main-replay">Сыграть ещё раз</span>
   </section>`;

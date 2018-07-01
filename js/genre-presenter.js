@@ -1,13 +1,13 @@
-import PerformerView from "./performerView";
+import GenreView from "./genre-view";
 import {calculateLevelTime, switchScreen} from "./util";
 import Router from "./router";
 
 let timer;
 
-export default class PerformerPresenter {
+export default class GenrePresenter {
   constructor(model) {
     this.model = model;
-    this.content = new PerformerView(this.model.currentState, this.model.getLevelNumber(this.model.state.level - 1));
+    this.content = new GenreView(this.model.currentState, this.model.getLevelNumber(this.model.state.level - 1));
     this.root = switchScreen(this.content.element);
     this.timer = timer;
     this.isTimerInit = false;
@@ -23,28 +23,42 @@ export default class PerformerPresenter {
     } else if (this.model.state.time === 0) {
       Router.showResultLoseTimesEndScreen();
     } else if (this.model.state.level === 11) {
-      // Router.showResultWinScreen();
       Router.showStatisticScreen();
-    } else if (this.model.getLevelNumber(this.model.state.level - 1).type === `genre`) {
-      Router.showGenreScreen();
-    } else {
+    } else if (this.model.getLevelNumber(this.model.state.level - 1).type === `performer`) {
       Router.showPerformerScreen();
+    } else {
+      Router.showGenreScreen();
     }
   }
 
   changeLevel() {
     const start = new Date();
-    this.content.onSwitch = (isCorrect) => {
+    this.content.onSwitch = (evt, result, answers) => {
+      evt.preventDefault();
+      const data = this.model.data[this.model.state.level - 1];
+      let countOfCorrectAnswers = 0;
+      data.answers.forEach((elem) => {
+        if (elem.correct) {
+          countOfCorrectAnswers++;
+        }
+      });
+
       this.model.nextLevel();
+      result = answers.every((el) => {
+        return el === true;
+      });
+      if (result) {
+        result = (answers.length === countOfCorrectAnswers);
+      }
       let currentAnswer = {
-        correct: isCorrect,
+        correct: result,
         time: calculateLevelTime(start)
       };
       this.model.state.results.push(currentAnswer);
-
       if (currentAnswer.correct === false) {
         this.model.loseLive();
       }
+
       this.answer();
       this.stopTimer();
       this.isTimerInit = true;
@@ -74,7 +88,6 @@ export default class PerformerPresenter {
   stopTimer() {
     clearInterval(this.timer);
   }
-
 
   init() {
     this.changeLevel();

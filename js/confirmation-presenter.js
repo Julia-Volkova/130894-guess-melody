@@ -1,4 +1,4 @@
-import ConfirmationView from "./confirmationView";
+import ConfirmationView from "./confirmation-view";
 import Router from "./router";
 import {showModal, removeElementFromDom} from "./util";
 

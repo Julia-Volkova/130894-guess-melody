@@ -1,5 +1,5 @@
 import {switchScreen} from "./util";
-import WelcomeView from "./welcomeView";
+import WelcomeView from "./welcome-view";
 import Router from "./router";
 
 export default class WelcomePresenter {

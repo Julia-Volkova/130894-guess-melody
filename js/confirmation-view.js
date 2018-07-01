@@ -1,4 +1,4 @@
-import AbstractView from "./abstractView";
+import AbstractView from "./abstract-view";
 
 export default class confirmationView extends AbstractView {
   constructor() {

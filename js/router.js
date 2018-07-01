@@ -1,16 +1,16 @@
-import WelcomePresenter from "./welcomePresenter";
-import PerformerPresenter from "./performerPresenter";
-import GenrePresenter from "./genrePresenter";
-import ResultLosePresenter from "./resultLosePresenter";
-import ResultWinPresenter from "./resultWinPresenter";
-import {statisticLose} from "./gameData";
-import GameModel from "./gameModel";
-import ErrorView from "./ErrorView";
+import WelcomePresenter from "./welcome-presenter";
+import PerformerPresenter from "./performer-presenter";
+import GenrePresenter from "./genre-presenter";
+import ResultLosePresenter from "./result-lose-presenter";
+import ResultWinPresenter from "./result-win-presenter";
+import {statisticLose} from "./game-data";
+import GameModel from "./game-model";
+import ErrorView from "./error-view";
 import {showModal, switchScreen} from "./util";
-import {adaptServerData} from "./adaptServerData";
-import SplashScreen from "./splashScreen";
-import ConfirmationPresenter from "./confirmationPresenter";
-import LoadFinalResultPresenter from "./loadFinalResultPresenter";
+import {adaptServerData} from "./adapt-server-data";
+import SplashScreen from "./splash-screen";
+import ConfirmationPresenter from "./confirmation-presenter";
+import LoadFinalResultPresenter from "./load-final-result-presenter";
 import Loader from "./loader";
 
 export default class Router {

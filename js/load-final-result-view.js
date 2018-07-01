@@ -1,4 +1,4 @@
-import AbstractView from "./abstractView";
+import AbstractView from "./abstract-view";
 import renderHeaderTemplate from "./header";
 
 export default class LoadFinalResultView extends AbstractView {

@@ -1,4 +1,4 @@
-import LoadFinalResultView from "./loadFinalResultView";
+import LoadFinalResultView from "./load-final-result-view";
 import {switchScreen} from "./util";
 import Router from "./router";
 

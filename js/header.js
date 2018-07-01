@@ -1,4 +1,5 @@
 export default function renderHeaderTemplate(state) {
+  const LIVE_COUNT = 3;
   const headerTemplate =
     `<a class="play-again play-again__wrap" href="#">
       <img class="play-again__img" src="/img/melody-logo-ginger.png" alt="logo" width="177" height="76">
@@ -16,7 +17,7 @@ export default function renderHeaderTemplate(state) {
       </div>
     </svg>
     <div class="main-mistakes">
-    ${new Array(3 - state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``)}
+    ${new Array(LIVE_COUNT - state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``)}
     </div>
 `;
 

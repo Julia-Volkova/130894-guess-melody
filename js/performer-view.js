@@ -1,5 +1,5 @@
-import AbstractView from "./abstractView";
-import controlPlayer from "./controlPlayer";
+import AbstractView from "./abstract-view";
+import controlPlayer from "./control-player";
 import renderHeaderTemplate from "./header";
 
 export default class PerformerView extends AbstractView {
