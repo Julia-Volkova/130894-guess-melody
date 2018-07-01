@@ -4,10 +4,10 @@ import Router from "./router";
 
 export default class ResultWinPresenter {
   constructor(model, obj) {
-    this.model = model;
-    this.obj = obj;
-    this.content = new ResultWinView(this.model.currentState, this.obj, this.model.currentTime);
-    this.root = switchScreen(this.content.element);
+    this._model = model;
+    this._obj = obj;
+    this._content = new ResultWinView(this._model.currentState, this._obj, this._model.currentTime);
+    this.root = switchScreen(this._content.element);
   }
 
   get element() {
@@ -15,11 +15,11 @@ export default class ResultWinPresenter {
   }
 
   backToStartGame() {
-    this.content.onSwitch = () => {
+    this._content.onSwitch = () => {
       Router.showWelcomeScreen();
     };
 
-    this.content.onDrawWelcome = () => {
+    this._content.onDrawWelcome = () => {
       Router.start();
     };
   }

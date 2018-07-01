@@ -4,8 +4,8 @@ import {showModal, removeElementFromDom} from "./util";
 
 export default class ConfirmationPresenter {
   constructor() {
-    this.content = new ConfirmationView();
-    this.root = showModal(this.content.element);
+    this._content = new ConfirmationView();
+    this.root = showModal(this._content.element);
   }
 
   get element() {
@@ -13,14 +13,14 @@ export default class ConfirmationPresenter {
   }
 
   chooseAction() {
-    this.content.onCloseModal = (evt) => {
+    this._content.onCloseModal = (evt) => {
       evt.preventDefault();
-      removeElementFromDom(this.content.modalWrap);
+      removeElementFromDom(this._content.modalWrap);
     };
 
-    this.content.onBackToStartGame = (evt) => {
+    this._content.onBackToStartGame = (evt) => {
       evt.preventDefault();
-      removeElementFromDom(this.content.modalWrap);
+      removeElementFromDom(this._content.modalWrap);
       Router.start();
     };
   }

@@ -4,9 +4,9 @@ import Router from "./router";
 
 export default class WelcomePresenter {
   constructor(model) {
-    this.model = model;
-    this.content = new WelcomeView();
-    this.root = switchScreen(this.content.element);
+    this._model = model;
+    this._content = new WelcomeView();
+    this.root = switchScreen(this._content.element);
   }
 
   get element() {
@@ -14,10 +14,10 @@ export default class WelcomePresenter {
   }
 
   startGame() {
-    this.content.onSwitch = () => {
-      this.model.nextLevel();
-      this.model.creationTimeFormat();
-      if (this.model.getFirstLevelType() === `performer`) {
+    this._content.onSwitch = () => {
+      this._model.nextLevel();
+      this._model.creationTimeFormat();
+      if (this._model.getFirstLevelType() === `performer`) {
         Router.showPerformerScreen();
       } else {
         Router.showGenreScreen();

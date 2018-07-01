@@ -4,10 +4,10 @@ import Router from "./router";
 
 export default class ResultLosePresenter {
   constructor(model, type) {
-    this.model = model;
-    this.type = type;
-    this.content = new ResultLoseView(this.model.currentState, this.type);
-    this.root = switchScreen(this.content.element);
+    this._model = model;
+    this._type = type;
+    this._content = new ResultLoseView(this._model.currentState, this._type);
+    this.root = switchScreen(this._content.element);
   }
 
   get element() {
@@ -15,11 +15,11 @@ export default class ResultLosePresenter {
   }
 
   showResults() {
-    this.content.onSwitch = () => {
+    this._content.onSwitch = () => {
       Router.showWelcomeScreen();
     };
 
-    this.content.onDrawWelcome = () => {
+    this._content.onDrawWelcome = () => {
       Router.start();
     };
   }

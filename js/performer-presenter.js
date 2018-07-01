@@ -6,10 +6,10 @@ let timer;
 
 export default class PerformerPresenter {
   constructor(model) {
-    this.model = model;
-    this.content = new PerformerView(this.model.currentState, this.model.getLevelNumber(this.model.state.level - 1));
-    this.root = switchScreen(this.content.element);
-    this.timer = timer;
+    this._model = model;
+    this._content = new PerformerView(this._model.currentState, this._model.getLevelNumber(this._model.state.level - 1));
+    this.root = switchScreen(this._content.element);
+    this._timer = timer;
     this.isTimerInit = false;
   }
 
@@ -17,15 +17,14 @@ export default class PerformerPresenter {
     return this.root;
   }
 
-  answer() {
-    if (this.model.state.lives === 0) {
+  _answer() {
+    if (this._model.state.lives === 0) {
       Router.showResultLoseLivesEndScreen();
-    } else if (this.model.state.time === 0) {
+    } else if (this._model.state.time === 0) {
       Router.showResultLoseTimesEndScreen();
-    } else if (this.model.state.level === 11) {
-      // Router.showResultWinScreen();
+    } else if (this._model.state.level === 11) {
       Router.showStatisticScreen();
-    } else if (this.model.getLevelNumber(this.model.state.level - 1).type === `genre`) {
+    } else if (this._model.getLevelNumber(this._model.state.level - 1).type === `genre`) {
       Router.showGenreScreen();
     } else {
       Router.showPerformerScreen();
@@ -34,45 +33,45 @@ export default class PerformerPresenter {
 
   changeLevel() {
     const start = new Date();
-    this.content.onSwitch = (isCorrect) => {
-      this.model.nextLevel();
+    this._content.onSwitch = (isCorrect) => {
+      this._model.nextLevel();
       let currentAnswer = {
         correct: isCorrect,
         time: calculateLevelTime(start)
       };
-      this.model.state.results.push(currentAnswer);
+      this._model.state.results.push(currentAnswer);
 
       if (currentAnswer.correct === false) {
-        this.model.loseLive();
+        this._model.loseLive();
       }
-      this.answer();
-      this.stopTimer();
+      this._answer();
+      this._stopTimer();
       this.isTimerInit = true;
     };
 
-    this.content.onDrawWelcome = () => {
+    this._content.onDrawWelcome = () => {
       Router.showModalConfirmation();
     };
   }
 
   changeTimer() {
-    if (this.model.timer.isTimeout) {
+    if (this._model.timer.isTimeout) {
       Router.showResultLoseTimesEndScreen();
-      this.stopTimer();
+      this._stopTimer();
     }
-    this.model.creationTimeFormat();
-    this.model.updateTimer(this.content.timerMin, this.content.timerSec);
-    this.model.tick();
-    if (this.model.timer.remainingTime <= 30) {
-      this.content.timerContainer.classList.add(`timer-value--finished`);
+    this._model.creationTimeFormat();
+    this._model.updateTimer(this._content.timerMin, this._content.timerSec);
+    this._model.tick();
+    if (this._model.timer.remainingTime <= 30) {
+      this._content.timerContainer.classList.add(`timer-value--finished`);
     }
-    this.timer = setTimeout(() => {
+    this._timer = setTimeout(() => {
       this.changeTimer();
     }, 1000);
   }
 
-  stopTimer() {
-    clearInterval(this.timer);
+  _stopTimer() {
+    clearInterval(this._timer);
   }
 
 
