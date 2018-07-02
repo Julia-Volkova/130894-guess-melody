@@ -1,13 +1,20 @@
 import {timeCount, showResultScreen} from "./game-data";
 import {getMinutesAndSeconds} from "./util";
 
+const LIVE_COUNT = 3;
+const START_TIME = 300;
+const LEVEL_COUNT = 10;
+const BORDER_TIME_FAST_ANSWER = 30;
+const POINTS_STEP = 2;
+const TIME_LENGTH = 2;
+
 export default class GameModel {
   constructor(data) {
     this.data = data;
     this.state = {
       points: 0,
-      lives: 3,
-      time: 300,
+      lives: LIVE_COUNT,
+      time: START_TIME,
       level: 0,
       fastAnswers: 0,
       statistics: ``,
@@ -27,17 +34,17 @@ export default class GameModel {
   }
 
   calcScores() {
-    if (this.state.results.length < 9 && this.state.lives > 0 || this.state.lives === 0) {
+    if (this.state.results.length < LEVEL_COUNT - 1 && this.state.lives > 0 || this.state.lives === 0) {
       return -1;
     }
 
     this.state.results.forEach((elem) => {
-      if (elem.correct && elem.time >= 30) {
+      if (elem.correct && elem.time >= BORDER_TIME_FAST_ANSWER) {
         this.state.points++;
-      } else if (elem.correct && elem.time < 30) {
-        this.state.points += 2;
+      } else if (elem.correct && elem.time < BORDER_TIME_FAST_ANSWER) {
+        this.state.points += POINTS_STEP;
       } else if (!elem.correct) {
-        this.state.points -= 2;
+        this.state.points -= POINTS_STEP;
       }
     });
 
@@ -51,7 +58,7 @@ export default class GameModel {
     let calcFastAnswers = (arr) => {
       let count = 0;
       arr.forEach((elem) => {
-        if (elem.time < 30) {
+        if (elem.time < BORDER_TIME_FAST_ANSWER) {
           count++;
         }
       });
@@ -92,10 +99,11 @@ export default class GameModel {
 
   creationTimeFormat() {
     let {minutes, seconds} = getMinutesAndSeconds(this.timer.remainingTime);
-    if (minutes.toString().length < 2) {
+    if (minutes.toString().length < TIME_LENGTH) {
       minutes = `0` + minutes;
     }
-    if (seconds.toString().length < 2) {
+
+    if (seconds.toString().length < TIME_LENGTH) {
       seconds = `0` + seconds;
     }
 

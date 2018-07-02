@@ -9,13 +9,12 @@ export default function renderHeaderTemplate(state) {
         cx="390" cy="390" r="370"
         class="timer-line"
         style="filter: url(.#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center"></circle>
-
-      <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
+    </svg>
+    <div class="timer-value" xmlns="http://www.w3.org/1999/xhtml">
         <span class="timer-value-mins">${state.timeFormat.min}</span><!--
         --><span class="timer-value-dots">:</span><!--
         --><span class="timer-value-secs">${state.timeFormat.sec}</span>
-      </div>
-    </svg>
+    </div>
     <div class="main-mistakes">
     ${new Array(LIVE_COUNT - state.lives).fill(`<img class="main-mistake" src="img/wrong-answer.png" width="35" height="49">`).join(``)}
     </div>
