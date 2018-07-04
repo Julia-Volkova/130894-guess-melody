@@ -36,12 +36,7 @@ export default class GenrePresenter {
     this._content.onSwitch = (evt, result, answers) => {
       evt.preventDefault();
       const data = this._model.data[this._model.state.level - 1];
-      let countOfCorrectAnswers = 0;
-      data.answers.forEach((elem) => {
-        if (elem.correct) {
-          countOfCorrectAnswers++;
-        }
-      });
+      const countOfCorrectAnswers = data.answers.reduce((acc, next) => acc + (next.correct ? 1 : 0), 0);
 
       this._model.nextLevel();
       result = answers.every((el) => {
